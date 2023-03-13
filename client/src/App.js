@@ -67,7 +67,7 @@ function App() {
             
           }}
         >
-          IMPORT CSV1234
+          IMPORT CSV
 
         </button>
       </form>
