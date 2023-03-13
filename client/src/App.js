@@ -5,6 +5,8 @@ function App() {
   const [file, setFile] = useState();
   const [array, setArray] = useState([]);
 
+ 
+
   const fileReader = new FileReader();
 
   const handleOnChange = (e) => {
@@ -56,12 +58,14 @@ function App() {
         <button
           onClick={(e) => {
             handleOnSubmit(e);
+            
           }}
         >
           IMPORT CSV
+
         </button>
       </form>
-
+ 
       <br />
 
       <table>
