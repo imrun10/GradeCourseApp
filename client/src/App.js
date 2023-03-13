@@ -1,11 +1,21 @@
 import './App.css';
 import React, { useState } from "react";
+import Axios from 'axios'
 
 function App() {
   const [file, setFile] = useState();
   const [array, setArray] = useState([]);
 
- 
+  function sendFile () {
+    Axios.post("http://localhost:3001/api/save/",{
+    arr:array,
+    }).then(console.log("SENT"))}
+
+    function showData () {
+      Axios.get("http://localhost:3001/api/show/").then(console.log("shown"))
+    }
+    
+
 
   const fileReader = new FileReader();
 
@@ -64,6 +74,14 @@ function App() {
           IMPORT CSV
 
         </button>
+
+        <button onClick= {(e) => {
+          sendFile();
+        }}>
+          +
+        </button>
+
+        <button onClick= {(e) => {showData();}}></button>
       </form>
  
       <br />
