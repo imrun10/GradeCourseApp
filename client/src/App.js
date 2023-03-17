@@ -1,21 +1,20 @@
-import './App.css';
+import "./App.css";
 import React, { useState } from "react";
-import Axios from 'axios'
+import Axios from "axios";
 
 function App() {
   const [file, setFile] = useState();
   const [array, setArray] = useState([]);
 
-  function sendFile () {
-    Axios.post("http://localhost:3001/api/save/",{
-    arr:array,
-    }).then(console.log("SENT"))}
+  function sendFile() {
+    Axios.post("http://localhost:3001/api/save/", {
+      arr: array,
+    }).then(console.log("SENT"));
+  }
 
-    function showData () {
-      Axios.get("http://localhost:3001/api/show/").then(console.log("shown"))
-    }
-    
-
+  function showData() {
+    Axios.get("http://localhost:3001/api/show/").then(console.log("shown"));
+  }
 
   const fileReader = new FileReader();
 
@@ -23,11 +22,11 @@ function App() {
     setFile(e.target.files[0]);
   };
 
-  const csvFileToArray = string => {
+  const csvFileToArray = (string) => {
     const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
     const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
 
-    const array = csvRows.map(i => {
+    const array = csvRows.map((i) => {
       const values = i.split(",");
       const obj = csvHeader.reduce((object, header, index) => {
         object[header] = values[index];
@@ -68,22 +67,26 @@ function App() {
         <button
           onClick={(e) => {
             handleOnSubmit(e);
-            
           }}
         >
           IMPORT CSV
-
         </button>
 
-        <button onClick= {(e) => {
-          sendFile();
-        }}>
+        <button
+          onClick={(e) => {
+            sendFile();
+          }}
+        >
           +
         </button>
 
-        <button onClick= {(e) => {showData();}}></button>
+        <button
+          onClick={(e) => {
+            showData();
+          }}
+        ></button>
       </form>
- 
+
       <br />
 
       <table>
