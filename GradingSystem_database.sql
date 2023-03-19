@@ -30,8 +30,8 @@ CREATE TABLE FacultySection(
 
 
 CREATE TABLE StudentSection(
-    Stu_Section_id int PRIMARY KEY NOT NULL,
-    stu_id VARCHAR(10), 
+   stu_Section_id int PRIMARY KEY NOT NULL,
+   stu_id VARCHAR(10), 
    Section_id int,
  
   FOREIGN KEY (Section_id) REFERENCES section(Section_id),
