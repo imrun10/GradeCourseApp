@@ -1,16 +1,27 @@
-import "./App.css";
 import React, { useState } from "react";
 import Axios from "axios";
+import Courses from "./components/Courses";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+
+
+
 
 function App() {
   const [file, setFile] = useState();
   const [array, setArray] = useState([]);
+
+  let importedCourses =[
+    {name:"english", id:"1241",prof:"Dr mar"},{name:"science", id:"2342",prof:"Dr mar"},]
+
+ 
 
   function sendFile() {
     Axios.post("http://localhost:3001/api/save/", {
       arr: array,
     }).then(console.log("SENT"));
   }
+
 
   function showData() {
     Axios.get("http://localhost:3001/api/show/").then(console.log("shown"));
@@ -55,9 +66,24 @@ function App() {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <h1>REACTJS CSV IMPORT EXAMPLE </h1>
-      <form>
+      <header>
+      <h1 class = "title">GRADE APP </h1> </header>
+
+
+      <br />
+      <body>
+      <div class="container">
+      {importedCourses.map((e) => (
+            <div class="item"> 
+           <Courses name={e.name} id={e.id} proff = {e.prof} />
+           </div>
+        ))}</div>
+        </body>
+                <footer>
+
+              <form>
         <input
+          class="btn btn-primary" 
           type={"file"}
           id={"csvFileInput"}
           accept={".csv"}
@@ -65,50 +91,35 @@ function App() {
         />
 
         <button
+        class="btn btn-primary" 
           onClick={(e) => {
             handleOnSubmit(e);
+        
+
           }}
         >
           IMPORT CSV
         </button>
 
         <button
+        class="btn btn-primary" 
+        style = {{backgroundColor: "RGB(100, 239, 100",borderColor: "RGB(100, 239, 100)"}}
           onClick={(e) => {
             sendFile();
+           
+
           }}
         >
           +
         </button>
 
-        <button
-          onClick={(e) => {
-            showData();
-          }}
-        ></button>
+
+        
       </form>
-
-      <br />
-
-      <table>
-        <thead>
-          <tr key={"header"}>
-            {headerKeys.map((key) => (
-              <th>{key}</th>
-            ))}
-          </tr>
-        </thead>
-
-        <tbody>
-          {array.map((item) => (
-            <tr key={item.id}>
-              {Object.values(item).map((val) => (
-                <td>{val}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      </footer>
+      
     </div>
+    
   );
 }
 

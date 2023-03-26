@@ -2,3 +2,41 @@
   text-align: center;
 }
 
+.btn{
+  border-radius: 50px!important;
+  margin:10px;
+}
+
+body {
+ 
+  background: #1B1B25 ;
+  color: #fff;
+  font-family: 'Josefin Sans', sans-serif !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: -300px !important;
+
+
+}
+.title {
+  margin-top: 50px;
+  margin-bottom: -10px;}
+  
+
+
+.container {
+    display: flex;
+  }
+.item {
+    flex-basis: 100px;
+    height: 100px;
+    margin: 20px;
+    min-width: 200px;
+
+  }
+
+  
