@@ -9,6 +9,7 @@ function Courses(props) {
     const toCourse=()=>{
   navigate('course',{state:props});
     }
+
     return (
         <a onClick={()=>{toCourse()}}>            
             <div class="card" id="course-card">

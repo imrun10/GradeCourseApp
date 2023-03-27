@@ -4,7 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import SignIn from "./pages/signIn";
 import CoursePage from "./pages/CoursePage";
-
+import StudentSummaryPage from "./pages/StudentSummaryPage";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -19,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "course",
     element: <CoursePage />,
+  },
+  {
+    path: "student",
+    element: <StudentSummaryPage />,
   }
 ]);
 
