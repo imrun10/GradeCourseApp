@@ -29,8 +29,8 @@ function StudentSummaryPage() {
 
       <body>
         <br></br>
-        <table width = "500px" style = {{ backgroundColor: "#303050" }}>
-          <tr style = {{ backgroundColor: "#404080" }}>
+        <table width = "500px">
+          <tr style = {{ backgroundColor: "#004080" }}>
             <th>Student Name</th><th>ID</th><th>Course</th>
           </tr>
           <tr>
@@ -38,8 +38,8 @@ function StudentSummaryPage() {
           </tr>
         </table>
         <br></br>
-        <table style = {{ backgroundColor: "#303050" }}>
-          <tr style = {{ backgroundColor: "#404080" }}>
+        <table >
+          <tr style = {{ backgroundColor: "#004080" }}>
             <th>Assignment</th><th>Percentage</th><th>Weight</th><th>Weighted Grade</th>
           </tr>
           <tr>
@@ -58,8 +58,8 @@ function StudentSummaryPage() {
             <td>Participation</td><td>90%</td><td>10%</td><td>{90*0.1}%</td>
           </tr>
           <tr><td></td></tr>
-          <tr style = {{ backgroundColor: "#202040" }}>
-            <th> TOTAL GRADE</th><td></td><td></td><td>90%</td>
+          <tr>
+            <th> TOTAL GRADE</th><td></td><td></td><th>90%</th>
           </tr>
         </table>
 
