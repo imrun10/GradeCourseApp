@@ -1,19 +1,33 @@
 import react from "react";
 import Axios from "axios";
 import "./StudentSummaryPage.css";
+import {
+  useLocation,
+  useNavigate,
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom"; 
 
-function DownloadSummaryFile() {
-  console.log("Downloading CSV file...");
-}
 
-function GetStudentData() {
-  console.log("Retrieve Student data...");
-}
-function GetAssignmentData() {
-  console.log("Retrieve Assignment data...");
-}
+
+
+
 
 function StudentSummaryPage() {
+  const location = useLocation();
+
+  function DownloadSummaryFile() {
+    console.log("Downloading CSV file...");
+  }
+  
+  function GetStudentData() {
+    console.log("Retrieve Student data...");
+  }
+  function GetAssignmentData() {
+    console.log("Retrieve Assignment data...");
+  }
   const courseCode = "ABCD123";
   const studentName = "Firstname M. Lastname";
   const studentID = "A00000";
@@ -31,10 +45,10 @@ function StudentSummaryPage() {
         <br></br>
         <table width = "500px">
           <tr style = {{ backgroundColor: "#004080" }}>
-            <th>Student Name</th><th>ID</th><th>Course</th>
+            <th>Name</th><th>ID</th><th>Course</th>
           </tr>
           <tr>
-            <td>{studentName}</td><td>{studentID}</td><td>{courseCode}</td>
+            <td>{location.state.name}</td><td>{location.state.id}</td><td>{courseCode}</td>
           </tr>
         </table>
         <br></br>
@@ -65,7 +79,7 @@ function StudentSummaryPage() {
 
       </body>
 
-      <footer>
+      <footer class = "footer">
 
         <button class="btn btn-primary"
           onClick={(e) => { DownloadSummaryFile(); }}> Download Student Summary

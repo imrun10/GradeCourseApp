@@ -9,19 +9,19 @@ import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "app",
     element: <App />,
   },
   {
-    path: "signin",
+    path: "/",
     element: <SignIn />,
   },
   {
-    path: "course",
+    path: "/app/course",
     element: <CoursePage />,
   },
   {
-    path: "student",
+    path: "app/course/student",
     element: <StudentSummaryPage />,
   }
 ]);

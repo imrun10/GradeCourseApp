@@ -7,18 +7,21 @@ import "./App.css";
 
 
 
+
 function App() {
  
+  const [importedCourses, setImportedCourses] = useState([]);
 
-  let importedCourses =[
-    {name:"english", id:"1241",prof:"Dr mar"},{name:"science", id:"2342",prof:"Dr mar"},]
+Axios.get("http://localhost:3001/api/course/").then((response)=>{(setImportedCourses(response.data))});
+
 
  
 
   return (
     <div style={{ textAlign: "center" }}>
       <header>
-      <h1 class = "title">GRADE APP </h1> </header>
+      <h1 class = "title">GRADE APP </h1>
+       </header>
 
 
       <br />

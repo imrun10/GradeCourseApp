@@ -6,12 +6,17 @@ import './componentsCSS.css'
 function Courses(props) {
     const navigate = useNavigate();
 
-    const toCourse=()=>{
-  navigate('course',{state:props});
-    }
+
+  
+
+    
+    const toCourse = () => {
+     
+      navigate("course", {state: props});
+    };
 
     return (
-        <a onClick={()=>{toCourse()}}>            
+        <a onClick={()=>{ toCourse()}}>            
             <div class="card" id="course-card">
                 <div class="card-body">
                     <h5 class="card-title">{props.name}</h5>

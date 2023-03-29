@@ -6,22 +6,48 @@
   border-radius: 50px!important;
   margin:10px;
 }
-
+header {
+  position: relative;
+}
+#top-right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
 body {
  
-  background: #1B1B25 ;
-  color: #fff;
+  color: #000000;
   font-family: 'Josefin Sans', sans-serif !important;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-footer {
-  margin-top: -300px !important;
 
-
+body {
+  height: 100% !important;
 }
+
+.wrapper {
+  min-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.content {
+  /* Set margin-bottom to equal the height of the footer */
+   margin-bottom:40px !important; 
+}
+
+.footer {
+   position:sticky !important;
+   bottom :0 !important;  
+   width :100% !important;
+   height :70px !important; 
+   padding-bottom: 90px;
+   background-color: transparent !important;
+}
+
 .title {
   margin-top: 50px;
   margin-bottom: -10px;}

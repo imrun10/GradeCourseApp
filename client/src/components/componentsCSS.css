@@ -53,3 +53,7 @@ body {
     min-width: 200px;
 }
 
+th{
+    background-color: rgb(89, 130, 243) !important;
+}
+
