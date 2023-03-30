@@ -1,13 +1,13 @@
 import react from "react";
-import { useNavigate, createBrowserRouter, RouterProvider, Route,Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // import the useNavigate function from react-router-dom that will help us route to other pages and pass data as we do it
 
 import './signin.css'
 function SignIn() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // intiales an instance of the useNavigate function and use this instance to route
 
 
   const toApp=()=>{
-    navigate('App');
+    navigate('App'); // take us to the App page
       }
   
   return(
@@ -19,7 +19,7 @@ function SignIn() {
               <div class="form-container">
                 <input type="text" placeholder="Email address or phone number" />
                   <input type="password" placeholder="Password" />
-                    <button class="btn-login" onClick={() => {toApp()}}>
+                    <button class="btn-login" onClick={() => {toApp()}} >{/*when the user click on the login button it will call the toApp function*/} 
                     Login</button>
                     <a href="#">Forgotten password?</a>
                   </div>

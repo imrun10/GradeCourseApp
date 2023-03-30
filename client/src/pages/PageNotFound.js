@@ -1,0 +1,1 @@
+// all users will be redirected to this page if they try to access a page that does not exist

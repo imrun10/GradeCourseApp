@@ -1,25 +1,18 @@
 import react from "react";
-import {
-  useLocation,
-  useNavigate,
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
-import Axios from "axios";
-import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // useLocation will allow us to use data sent from other pages when they link here
+import Axios from "axios"; // Axios is a HTTP client for the browser and node.js (send data to backend)
+import { useState } from "react"; // useState is a hook that allows us to use variables in the html portoin of the code
 import "../App.css";
 import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Table from "../components/Table";
-import Papa from "papaparse";
+import Table from "../components/Table"; // table component
+import Papa from "papaparse"; // papa parse is a library that allows us to parse csv files
 
 export default function CoursePage() {
-  const location = useLocation();
+  const location = useLocation(); // we create and instance of this function and use it to get the data sent from the previous page
+  const [importedStudents, setImportedStudents] = useState([]); // this use state will help us save the data we get from the backend of all the students in the course the user clicked
 
-  const [importedStudents, setImportedStudents] = useState([]);
-
+  /*------------------------------- NOT DONE YET -------------------------------*/
   //   function getStudent(x){
   //     Axios.get("http://localhost:3001/api/show/").then((response)=>{
   //       setStudent(response.data);
@@ -27,25 +20,34 @@ export default function CoursePage() {
   //  }
 
   //}
+  /*----------------------------------------------------------------------------*/
 
+  /*------------------------------- Axios Requests -------------------------------*/
   Axios.get("http://localhost:3001/api/student", {
+    // this is a get request to the backend to get all the students in the course the user clicked
     params: {
-      name: location.state.name,
+      // this is how you send data to the back end when using a get request
+      name: location.state.name, // we send the name of the course so when parsing the test_student array we can get the right students for the right course
     },
-  }).then((response) => setImportedStudents(response.data));
+  }).then((response) => setImportedStudents(response.data)); // we save the data we get from the backend in the importedStudents variable
 
   function sendFile() {
+    // this function will send the csv file to the backend
     Axios.post("http://localhost:3001/api/save/", {
-      arr: parsedData,
-    }).then(console.log("SENT"));
-    console.log(parsedData);
+      arr: parsedData, // this is how we send data to the backend when using a post request, parsedData is an object, and you could add more objects or vars if you want after the comma but it has to be same format
+    }).then(console.log("SENT")); // this is just a console log to make sure the data was sent
   }
 
   function showData() {
-    Axios.get("http://localhost:3001/api/checkArray").then(console.log("shown"));
+    // this function will send a get request to the backend to check the array has been saved in the database
+    Axios.get("http://localhost:3001/api/checkArray").then(
+      console.log("shown")
+    );
   }
+  /*--------------------------------------------------------------------------*/
 
-  // ---------------------------- convert csv to array ----------------------------
+  /*------------------------------- Convert csv to an array -------------------------------*/
+  //State to store all data in a list of objects
   const [parsedData, setParsedData] = useState([]);
 
   //State to store table Column name
@@ -81,8 +83,10 @@ export default function CoursePage() {
     });
   };
 
-  // ---------------------------- convert csv to array ----------------------------
+  /*-----------------------------------------------------------------------------------*/
 
+  /*------------------------------- NOT DONE YET -------------------------------*/
+  /*
   //const checker = () => {
   //if(!(location.state.students == undefined || location.state.students == null || location.state.students == [] || importedStudents == [] || importedStudents == null || importedStudents == undefined)){
   //return (
@@ -118,7 +122,8 @@ export default function CoursePage() {
   //);}
   //else {
   // return <div>EMPTY COURSE</div>
-  //}
+  //} */
+  /*----------------------------------------------------------------------------*/
 
   return (
     <div>
@@ -128,7 +133,8 @@ export default function CoursePage() {
         <div class="wrapper">
           <div id="content">
             {location.state.name}
-            <Table props={importedStudents} />
+            <Table props={importedStudents} />{" "}
+            {/* this is how we pass data to the table component */}
           </div>
           <footer class="footer">
             <input
@@ -136,7 +142,7 @@ export default function CoursePage() {
               type="file"
               name="file"
               accept=".csv"
-              onChange={changeHandler}
+              onChange={changeHandler} // this is how we call the function that converts the csv file to an array
             />
 
             <button

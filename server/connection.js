@@ -8,6 +8,6 @@ const pool = createPool({
 })
 
 
-pool.query(`Select * from GradingSystem.Section`,(err,res)=>{
+pool.query(`Select * from GradingSystem.Section`,(err,res)=>{ // get the courses from the database
     return console.log(res)
 })

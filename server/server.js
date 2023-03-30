@@ -1,25 +1,32 @@
-const express = require("express");
-const app = express();
-const mysql = require("mysql");
-const cors = require("cors");
-app.use(cors());
-app.use(express.json());
-const con = mysql.createConnection({
+const express = require("express");  // we use ex[ress to create the server and handle requests
+const app = express();           // create the server and store it in a class called app
+const mysql = require("mysql"); // we use mysql to connect to the database
+const cors = require("cors");  // we use cors to allow cross origin requests which means that we can make requests from the frontend to the backend
+app.use(cors()); // we make our server use cors
+app.use(express.json()); // we make our server use express.json() which is a middleware that allows us to parse json
+
+
+
+// we create a connection to the database
+const con = mysql.createConnection({ 
   host: "localhost",
   user: "root",
   password: "root",
   database: "GradingSystem",
 });
 
-let test_student_course = "connection.js";
 
-let test_courses = [
+let test_student_course = "connection.js";
+ 
+// test data  for the student and course table
+let test_courses = [ // list that contains the courses
   { name: "english", id: "1241", prof: "Dr mar" },
   { name: "science", id: "2342", prof: "Dr mar" },
-];
-let test_students = [
+  { name: "spanish", id: "2342", prof: "Dr mar" },
+]; 
+let test_students = [  // list that contains two items. the first one is a object that contains the course name and the second one is a list that contains the students for that course
   [
-    { courseName: "english" },
+    { courseName: "english" }, 
     [
       {
         no: 1,
@@ -175,7 +182,7 @@ let test_students = [
   ],
 
   [
-    { courseName: "science" },
+    { courseName: "science" }, // list that contains two items. the first one is a object that contains the course name and the second one is a list that contains the students for that course
     [
       {
         no: 1,
@@ -199,36 +206,19 @@ let test_students = [
       },
     ],
   ],
-];
+]; 
 
-function x(name) {
-  for (let i = 0; i < test_students.length; i++) {
+
+function x(name) { // get the students from the right course from the test_student array from the database
+  for (let i = 0; i < test_students.length; i++) { // two dimentional array that why we have two for loop
     if (test_students[i][0].courseName === name) {
        return test_students[i][1];
     }
   }
 }
 
-app.get("/api/student", (req, res) => {
-  const name = req.query.name;
-  students = x(name);
-  res.send(students);
 
-});
-
-app.get("/api/course", (req, res) => {
-  res.send(test_courses);
-});
-
-app.get("/", (req, res) => {
-  res.send("server test");
-});
-
-var d;
-app.get("/api/checkArray", (req, res) => {
-  res.send(d);
-})
-
+// HUDA add your code to get data from the database and transform it to the format of test_student and test_course
 app.get("/api/show", (req, res) => {
   for (var i = 0; i < test_student_course.length; i++) {
     for (var j = 0; j < test_student_course[i].length; j++) {
@@ -239,10 +229,34 @@ app.get("/api/show", (req, res) => {
   }
 });
 
-app.post("/api/save/", (req, res) => {
-  d = req.body.arr;
+
+app.get("/api/student", (req, res) => { // get the students from the right course from the test_student array from the database
+  const name = req.query.name; // get the course name from the param the front end sent
+  students = x(name);
+  res.send(students); // send the students to the front end
+
 });
 
-app.listen(3001, () => {
+app.get("/api/course", (req, res) => { // send the courses to the front end
+  res.send(test_courses);
+});
+
+app.get("/", (req, res) => { // test the server
+  res.send("server test");
+});
+
+var CsvSent;
+app.post("/api/save/", (req, res) => { // saves the array that the front end sent to the server as a variable
+  CsvSent = req.body.arr;
+});
+app.get("/api/checkArray", (req, res) => {  // check if the array is empty or not by displaying it on the server
+  res.send(CsvSent);
+})
+
+
+
+
+
+app.listen(3001, () => { // start the server
   console.log("listening on port 3001");
 });
