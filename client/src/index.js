@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import SignIn from "./pages/signIn";
 import CoursePage from "./pages/CoursePage";
 import StudentSummaryPage from "./pages/StudentSummaryPage";
+import NotFound from "./pages/PageNotFound";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "app/course/student",
     element: <StudentSummaryPage />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   }
 ]);
 

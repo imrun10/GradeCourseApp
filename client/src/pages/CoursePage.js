@@ -12,6 +12,7 @@ export default function CoursePage() {
   const location = useLocation(); // we create and instance of this function and use it to get the data sent from the previous page
   const [importedStudents, setImportedStudents] = useState([]); // this use state will help us save the data we get from the backend of all the students in the course the user clicked
 
+  
   /*------------------------------- NOT DONE YET -------------------------------*/
   //   function getStudent(x){
   //     Axios.get("http://localhost:3001/api/show/").then((response)=>{
@@ -27,7 +28,8 @@ export default function CoursePage() {
     // this is a get request to the backend to get all the students in the course the user clicked
     params: {
       // this is how you send data to the back end when using a get request
-      name: location.state.name, // we send the name of the course so when parsing the test_student array we can get the right students for the right course
+      name: location.state.name, 
+      // we send the name of the course so when parsing the test_student array we can get the right students for the right course
     },
   }).then((response) => setImportedStudents(response.data)); // we save the data we get from the backend in the importedStudents variable
 

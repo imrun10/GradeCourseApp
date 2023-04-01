@@ -15,7 +15,7 @@ function App() {
   return (
     <div style={{ textAlign: "center" }}>
       <header>
-        <h1 class="title">GRADE APP </h1>
+        <h1 class="title">GRADE APP</h1>
       </header>
 
       <br />
@@ -24,7 +24,7 @@ function App() {
           {/*this is how we loop through the importedCourses array and display the courses in the array*/}
           {importedCourses.map((e) => (
             <div class="item">
-              <Courses name={e.name} id={e.id} proff={e.prof} />{" "}
+              <Courses name={e.name} id={e.id} proff={e.prof} />
               {/*this is how we send data to the courses component, we send the course name, id and proff*/}
             </div>
           ))}
