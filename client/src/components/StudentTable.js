@@ -14,6 +14,7 @@ function StudentTable(props) {
           <th scope="col">Name</th>
           <th scope="col">ID</th>
           <th scope="col">Grade</th>
+          <th scope="col">GPA</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +24,7 @@ function StudentTable(props) {
             <td>{e.name}</td>
             <td>{e.id}</td>
             <td>{e.grade}</td>
+            <td>{e.gpa}</td>
           </tr>
         ))}
       </tbody>
