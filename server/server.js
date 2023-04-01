@@ -206,8 +206,7 @@ let test_students = [  // list that contains two items. the first one is a objec
       },
     ],
   ],
-]; 
-
+];
 
 function x(name) { // get the students from the right course from the test_student array from the database
   for (let i = 0; i < test_students.length; i++) { // two dimentional array that why we have two for loop
@@ -253,8 +252,14 @@ app.get("/api/checkArray", (req, res) => {  // check if the array is empty or no
   res.send(CsvSent);
 })
 
-
-
+// get student data from the database for the studentSummaryPage
+app.get("/api/studentSummaryStudent", (req, res) => {
+  //database query here
+})
+// get student assignments data from the database for the studentSummaryPage
+app.get("/api/studentSummaryAssignments", (req, res) => {
+  //database query here
+})
 
 
 app.listen(3001, () => { // start the server

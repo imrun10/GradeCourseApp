@@ -13,9 +13,9 @@ function AssignmentTable(props) {
         <tr>
           <th scope="col">Assignment Name</th>
           <th scope="col">Grade</th>
-          <th scope="col">High</th>
-          <th scope="col">Mean</th>
           <th scope="col">Low</th>
+          <th scope="col">Mean</th>
+          <th scope="col">High</th>
           <th scope="col">Weight</th>
         </tr>
       </thead>
@@ -25,21 +25,14 @@ function AssignmentTable(props) {
           <tr>
             {" "}
             <td>{e.name}</td>
-            <td>{e.percentage}</td>
-            <td>{e.high}</td>
-            <td>{e.mean}</td>
-            <td>{e.low}</td>
-            <td>{e.weight}</td>
+            <td>{e.grade} %</td>
+            <td>{e.low} %</td>
+            <td>{e.mean} %</td>
+            <td>{e.high} %</td>
+            <td>{e.weight} %</td>
           </tr>
         ))}
       </tbody>
-      <tfoot>
-        <tr>
-          <td>TOTAL GRADE</td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tfoot>
     </table>
   );
 }
