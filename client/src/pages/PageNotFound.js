@@ -2,6 +2,7 @@
 
 import react from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from "../components/NavBar";
 import { useNavigate } from "react-router-dom"; // import the useNavigate function from react-router-dom that will help us route to other pages and pass data as we do it
 function NotFound() {
   const navigate = useNavigate();
@@ -11,6 +12,9 @@ function NotFound() {
 
     return (
       <div>
+      <header>
+      <Navbar />
+      </header>
         <body>
           <div class="d-flex align-items-center justify-content-center vh-100">
             <div class="text-center">
