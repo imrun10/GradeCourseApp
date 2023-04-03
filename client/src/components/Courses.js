@@ -18,7 +18,7 @@ function Courses(props) { /*props is the data that we send to the this component
 
     return (
         <a onClick={()=>{ toCourse()}}>    {/*when the user click on the course card it will call the toCourse function*/}        
-            <div class="card" id="course-card">
+            <div class="card course-card border-transparent">
                 <div class="card-body">
                     <h5 class="card-title">{props.name}</h5>    {/*display the course name*/}
                     <p class="card-text">{props.id}</p>     {/*display the course id*/}

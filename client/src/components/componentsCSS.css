@@ -1,10 +1,65 @@
-body {
-    background-color: #eee
+
+
+.course-card .card-body {
+
 }
 
-.course-card {
+.course-card .card-body {
     border: none;
-    width: 40%;
+    border-color: transparent !important;
+
+    width: 100%;
+    background-color: #ffffff;
+    color: rgb(58, 56, 56);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+tr th{
+    color: #ffffff !important;
+
+}
+/* make the table rows modern*/
+.table {
+    border: none;
+    width: 100%;
+    background-color: #ffffff;
+    color: rgb(58, 56, 56);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.course-card .card-body:hover {
+    background-color: #6672f5;
+    color: #fff;
+}
+
+
+.course-card .card-body:hover {
+    background-color: #6672f5;
+    color: #fff;
+    border-color: transparent !important;
+}
+.course-card .card-body h5.card-title {
+    font-size: 50px;
+    font-weight: bold;
+   /* how do i push the text to the left of the card */
+    margin-left: -80%; 
+    margin-top: -10%;
+ 
+}
+
+.course-card .card-body p.card-text {
+    font-size: 12px;
+}
+
+.course-card .card-body h5.card-title {
+  
+   
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.course-card .card-body p.card-text {
+    font-size: 12px;
 }
 
 .c-details span { 

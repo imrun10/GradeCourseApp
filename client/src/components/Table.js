@@ -15,7 +15,7 @@ function Table(props) {
       {" "}
       {/*this is the table that will display the students data*/}
       <thead>
-        <tr>
+        <tr class="table">
           <th scope="col">#</th> {/*this is the table headers*/}
           <th scope="col">Name</th>
           <th scope="col">ID</th>
@@ -26,7 +26,7 @@ function Table(props) {
           <th scope="col">Final Grade</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="table">
         {" "}
         {/*this is the table body that will display the students data*/}
         {/*this is a map function that will loop through the students data and display it in the table*/}

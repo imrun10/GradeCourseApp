@@ -5,7 +5,8 @@ import { NavigationType, useLocation } from "react-router-dom";
 import StudentTable from "../components/StudentTable";
 import AssignmentGradesTable from "../components/AssignmentGradesTable";
 import { useNavigate } from "react-router-dom";
-
+import Navbar from "../components/NavBar"; // this is how we import css from other files
+import "./style.css"
 function StudentSummaryPage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,6 +63,8 @@ function StudentSummaryPage() {
   return (
     <div>
       <header>
+
+        <Navbar />
         <h1 class="title">Student Summary</h1>
       </header>
       <br/>

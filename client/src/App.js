@@ -3,7 +3,7 @@ import Axios from "axios"; // axios is a library that allows us to make http req
 import Courses from "./components/Courses"; // this is how we import components from other files
 import "bootstrap/dist/css/bootstrap.min.css"; // this is how we import bootstrap css
 import "./App.css"; // this is how we import css from other files
-
+import Navbar from "./components/NavBar"; // this is how we import css from other files
 function App() {
   const [importedCourses, setImportedCourses] = useState([]); // this use state will save a list of courses(object) that we get from the backend
 
@@ -15,7 +15,7 @@ function App() {
   return (
     <div style={{ textAlign: "center" }}>
       <header>
-        <h1 class="title">GRADE APP</h1>
+      <Navbar />
       </header>
 
       <br />

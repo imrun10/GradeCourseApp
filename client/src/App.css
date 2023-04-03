@@ -2,6 +2,37 @@
   text-align: center;
 }
 
+#title {
+
+  font-family:Verdana, Geneva, Tahoma, sans-serif!important;
+  margin-top: -1%;
+  font-size: 30px;
+  /* make title bolder */
+  font-weight: 600;
+  color: #3b4bf6;
+}
+
+.btn:hover {
+  background-color: #6672f5;
+  color: #fff;
+}
+
+.navbar {
+  background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  padding: 10px 0;
+  position: relative;
+  z-index: 1030;
+}
+
+/*make logo smaller*/
+.logo {
+  padding: 0px 15px;
+  height: 15%;
+  width: 15%;
+}
 .btn{
   border-radius: 50px!important;
   margin:10px;
