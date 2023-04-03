@@ -16,14 +16,6 @@ const con = mysql.createConnection({
 });
 
 
-let test_student_course = "connection.js";
- 
-// test data  for the student and course table
-let test_courses = [ // list that contains the courses
-  { name: "english", id: "1241", prof: "Dr mar" },
-  { name: "science", id: "2342", prof: "Dr mar" },
-  { name: "spanish", id: "2342", prof: "Dr mar" },
-]; 
 let test_students = [  // list that contains two items. the first one is a object that contains the course name and the second one is a list that contains the students for that course
   [
     { courseName: "english" }, 
@@ -229,17 +221,32 @@ app.get("/api/show", (req, res) => {
 });
 
 
-app.get("/api/student", (req, res) => { // get the students from the right course from the test_student array from the database
-  const name = req.query.name; // get the course name from the param the front end sent
-  students = x(name);
-  res.send(students); // send the students to the front end
-
+/* Make sure you run this script (Select * from GradingSystem.student) in the database */
+app.get("/api/student", (req, res) => {
+   // query to get the students from the database
+  con.query(`Select * from GradingSystem.student`,function(err,result,fields){
+    if(err){
+        console.log(err)
+    }
+    else{
+        res.send(result)
+    }
+})
 });
 
+/* Make sure you run this script (Select * from GradingSystem.Section) in the database */
 app.get("/api/course", (req, res) => { // send the courses to the front end
-  res.send(test_courses);
-});
 
+  //query to get courses from database
+  con.query(`Select * from GradingSystem.Section`,function(err,result,fields){
+    if(err){
+        console.log(err)
+    }
+    else{
+        res.send(result)
+    }
+})
+});
 app.get("/", (req, res) => { // test the server
   res.send("server test");
 });
