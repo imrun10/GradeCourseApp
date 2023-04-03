@@ -13,7 +13,7 @@ CREATE TABLE Faculty (
     Faculty_Lname text,
     Faculty_Username VARCHAR(20)
 );
-CREATE TABLE Regisrar (
+CREATE TABLE Registrar (
     Registrar_id VARCHAR(10) PRIMARY KEY,
     Registrar_Fname text,
     Registrar_Lname text,
