@@ -255,10 +255,12 @@ app.get("/api/checkArray", (req, res) => {  // check if the array is empty or no
 // get student data from the database for the studentSummaryPage
 app.get("/api/studentSummaryStudent", (req, res) => {
   //database query here
+  //studentName, studentID, AssignmentGrade, GPA
 })
 // get student assignments data from the database for the studentSummaryPage
 app.get("/api/studentSummaryAssignments", (req, res) => {
   //database query here
+  //AssignmentName, Grade, Min, Mean, Max, Weight
 })
 
 
