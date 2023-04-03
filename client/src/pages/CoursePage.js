@@ -7,7 +7,7 @@ import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "../components/Table"; // table component
 import Papa from "papaparse"; // papa parse is a library that allows us to parse csv files
-
+import Navbar from "../components/NavBar";
 export default function CoursePage() {
   const location = useLocation(); // we create and instance of this function and use it to get the data sent from the previous page
   const [importedStudents, setImportedStudents] = useState([]); // this use state will help us save the data we get from the backend of all the students in the course the user clicked
@@ -33,7 +33,7 @@ export default function CoursePage() {
     },
   }).then((response) => setImportedStudents(response.data)); // we save the data we get from the backend in the importedStudents variable
 
-  function sendFile() {
+  function sendFile() { 
     // this function will send the csv file to the backend
     Axios.post("http://localhost:3001/api/save/", {
       arr: parsedData, // this is how we send data to the backend when using a post request, parsedData is an object, and you could add more objects or vars if you want after the comma but it has to be same format
@@ -129,12 +129,15 @@ export default function CoursePage() {
 
   return (
     <div>
-      <header></header>
+      <header>
+      <Navbar />
+      <h1 class="smaller-title">{location.state.name.charAt(0).toUpperCase() + location.state.name.slice(1)}</h1>
+
+      </header>
 
       <body>
         <div class="wrapper">
           <div id="content">
-            {location.state.name}
             <Table props={importedStudents} />{" "}
             {/* this is how we pass data to the table component */}
           </div>
