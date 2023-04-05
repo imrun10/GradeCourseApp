@@ -7,6 +7,7 @@ import CoursePage from "./pages/CoursePage";
 import StudentSummaryPage from "./pages/StudentSummaryPage";
 import NotFound from "./pages/PageNotFound";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import Adm from "./pages/Admin";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,9 @@ const router = createBrowserRouter([
     path: "app/course/student",
     element: <StudentSummaryPage />,
   },
+  {
+    path: "app/admin",
+    element: <Adm />,},
   {
     path: "*",
     element: <NotFound />,
