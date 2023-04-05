@@ -32,6 +32,12 @@ tr th{
     color: #fff;
 }
 
+tr:hover {
+    background-color: #6672f5;
+    color: #fff;
+    border-color: transparent !important;
+}
+
 
 .course-card .card-body:hover {
     background-color: #6672f5;
@@ -42,9 +48,7 @@ tr th{
     font-size: 50px;
     font-weight: bold;
    /* how do i push the text to the left of the card */
-    margin-left: -80%; 
-    margin-top: -10%;
- 
+
 }
 
 .course-card .card-body p.card-text {
@@ -102,6 +106,6 @@ tr th{
 }
 
 th{
-    background-color: rgb(89, 130, 243) !important;
+    background-color: #6672f5 !important;
 }
 
