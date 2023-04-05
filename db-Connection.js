@@ -5,8 +5,9 @@ const mysql = require("mysql");
 const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
+    port:3306,
     password: 'root',
-    database: 'GradingSystem'
+    database: 'gradingsystem'
 })
 
 con.connect((err)=>{
@@ -18,7 +19,7 @@ con.connect((err)=>{
     }
 })
 app.get("/fetch",(req,res)=>{
-    con.query(`Select * from GradingSystem.Section`,function(err,result,fields){
+    con.query(`Select * from GradingSystem.Student`,function(err,result,fields){
         if(err){
             console.log(err)
         }
