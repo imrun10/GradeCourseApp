@@ -242,7 +242,7 @@ app.get("/api/student", (req, res) => { // get the students from the right cours
 
 app.get("/api/course", (req, res) => { // send the courses to the front end
   con.connect(function(err) {
-    con.query("SELECT * FROM Section", function (err, result, fields) {
+    con.query("SELECT * FROM CourseSection", function (err, result, fields) {
       if (err) throw err;
       res.send(result);
     });
