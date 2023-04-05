@@ -24,7 +24,7 @@ function App() {
           {/*this is how we loop through the importedCourses array and display the courses in the array*/}
           {importedCourses.map((e) => (
             <div class="item">
-              <Courses name={e.name} id={e.id} proff={e.prof} />
+              <Courses name={e.CourseName} id={e.CourseCode} proff={e.FacultyName} />
               {/*this is how we send data to the courses component, we send the course name, id and proff*/}
             </div>
           ))}

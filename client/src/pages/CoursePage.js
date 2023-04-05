@@ -8,11 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "../components/Table"; // table component
 import Papa from "papaparse"; // papa parse is a library that allows us to parse csv files
 import Navbar from "../components/NavBar";
+import Error1 from "../components/Error1";
 export default function CoursePage() {
   const location = useLocation(); // we create and instance of this function and use it to get the data sent from the previous page
   const [importedStudents, setImportedStudents] = useState([]); // this use state will help us save the data we get from the backend of all the students in the course the user clicked
-
-  
   /*------------------------------- NOT DONE YET -------------------------------*/
   //   function getStudent(x){
   //     Axios.get("http://localhost:3001/api/show/").then((response)=>{
@@ -28,12 +27,12 @@ export default function CoursePage() {
     // this is a get request to the backend to get all the students in the course the user clicked
     params: {
       // this is how you send data to the back end when using a get request
-      name: location.state.name, 
+      name: location.state.name,
       // we send the name of the course so when parsing the test_student array we can get the right students for the right course
     },
   }).then((response) => setImportedStudents(response.data)); // we save the data we get from the backend in the importedStudents variable
-
-  function sendFile() { 
+  console.log(importedStudents); // this is just a console log to make sure the data was saved in the importedStudents variable
+  function sendFile() {
     // this function will send the csv file to the backend
     Axios.post("http://localhost:3001/api/save/", {
       arr: parsedData, // this is how we send data to the backend when using a post request, parsedData is an object, and you could add more objects or vars if you want after the comma but it has to be same format
@@ -87,85 +86,53 @@ export default function CoursePage() {
 
   /*-----------------------------------------------------------------------------------*/
 
-  /*------------------------------- NOT DONE YET -------------------------------*/
-  /*
-  //const checker = () => {
-  //if(!(location.state.students == undefined || location.state.students == null || location.state.students == [] || importedStudents == [] || importedStudents == null || importedStudents == undefined)){
-  //return (
-  <div>
-    <header></header>
 
-    <body>
-      <div class="wrapper">
-        <div id="content">{location.state.name}</div>
-        <footer class="footer">
-          <input
-            type="file"
-            name="file"
-            accept=".csv"
-            onChange={changeHandler}
-            style={{ display: "block", margin: "10px auto" }}
-          />
+  if(importedStudents === "MISSING"){
+    return (<header><Navbar /></header>, <Error1 />)
+  }
+  else{
+    return (
+      <div>
+        <header>
+          <Navbar />
+          <h1 class="smaller-title">
+            {location.state.name.charAt(0).toUpperCase() +
+              location.state.name.slice(1)}
+          </h1>
+        </header>
 
-          <button
-            class="btn btn-primary"
-            style={{
-              backgroundColor: "RGB(100, 239, 100",
-              borderColor: "RGB(100, 239, 100)",
-            }}
-            onClick={(e) => {}}
-          >
-            +
-          </button>
-        </footer>
-      </div>
-    </body>
-  </div>;
-  //);}
-  //else {
-  // return <div>EMPTY COURSE</div>
-  //} */
-  /*----------------------------------------------------------------------------*/
+        <body>
+          <div class="wrapper">
+            <div id="content">
+              <Table props={importedStudents} />{" "}
+              {/* this is how we pass data to the table component */}
+            </div>
+            <footer class="footer">
+              <input
+                class="btn btn-primary"
+                type="file"
+                name="file"
+                accept=".csv"
+                onChange={changeHandler} // this is how we call the function that converts the csv file to an array
+              />
 
-  return (
-    <div>
-      <header>
-      <Navbar />
-      <h1 class="smaller-title">{location.state.name.charAt(0).toUpperCase() + location.state.name.slice(1)}</h1>
-
-      </header>
-
-      <body>
-        <div class="wrapper">
-          <div id="content">
-            <Table props={importedStudents} />{" "}
-            {/* this is how we pass data to the table component */}
+              <button
+                class="btn btn-primary"
+                style={{
+                  backgroundColor: "RGB(100, 239, 100",
+                  borderColor: "RGB(100, 239, 100)",
+                }}
+                onClick={(e) => {
+                  sendFile();
+                  showData();
+                }}
+              >
+                +
+              </button>
+            </footer>
           </div>
-          <footer class="footer">
-            <input
-              class="btn btn-primary"
-              type="file"
-              name="file"
-              accept=".csv"
-              onChange={changeHandler} // this is how we call the function that converts the csv file to an array
-            />
+        </body>
+      </div>
+    );
+  }}
 
-            <button
-              class="btn btn-primary"
-              style={{
-                backgroundColor: "RGB(100, 239, 100",
-                borderColor: "RGB(100, 239, 100)",
-              }}
-              onClick={(e) => {
-                sendFile();
-                showData();
-              }}
-            >
-              +
-            </button>
-          </footer>
-        </div>
-      </body>
-    </div>
-  );
-}

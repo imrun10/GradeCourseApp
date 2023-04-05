@@ -48,9 +48,7 @@ tr:hover {
     font-size: 50px;
     font-weight: bold;
    /* how do i push the text to the left of the card */
-    margin-left: -80%; 
-    margin-top: -10%;
- 
+
 }
 
 .course-card .card-body p.card-text {

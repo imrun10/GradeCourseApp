@@ -19,14 +19,9 @@ const con = mysql.createConnection({
 let test_student_course = "connection.js";
  
 // test data  for the student and course table
-let test_courses = [ // list that contains the courses
-  { name: "english", id: "1241", prof: "Dr mar" },
-  { name: "science", id: "2342", prof: "Dr mar" },
-  { name: "spanish", id: "2342", prof: "Dr mar" },
-]; 
 let test_students = [  // list that contains two items. the first one is a object that contains the course name and the second one is a list that contains the students for that course
   [
-    { courseName: "english" }, 
+    { courseName: "Digital System" }, 
     [
       {
         no: 1,
@@ -182,7 +177,7 @@ let test_students = [  // list that contains two items. the first one is a objec
   ],
 
   [
-    { courseName: "science" }, // list that contains two items. the first one is a object that contains the course name and the second one is a list that contains the students for that course
+    { courseName:"Circuit"}, // list that contains two items. the first one is a object that contains the course name and the second one is a list that contains the students for that course
     [
       {
         no: 1,
@@ -209,10 +204,16 @@ let test_students = [  // list that contains two items. the first one is a objec
 ];
 
 function x(name) { // get the students from the right course from the test_student array from the database
+  let notfound = true;
   for (let i = 0; i < test_students.length; i++) { // two dimentional array that why we have two for loop
     if (test_students[i][0].courseName === name) {
+       notfound = false;
        return test_students[i][1];
     }
+
+  }
+  if (notfound) {
+    return "MISSING";
   }
 }
 
@@ -232,17 +233,28 @@ app.get("/api/show", (req, res) => {
 app.get("/api/student", (req, res) => { // get the students from the right course from the test_student array from the database
   const name = req.query.name; // get the course name from the param the front end sent
   students = x(name);
-  res.send(students); // send the students to the front end
-
+  if (students === "MISSING") {
+    res.send("MISSING");
+  } else {
+    res.send(students); // send the students to the front end
+  }
 });
 
 app.get("/api/course", (req, res) => { // send the courses to the front end
-  res.send(test_courses);
+  con.connect(function(err) {
+    con.query("SELECT * FROM Section", function (err, result, fields) {
+      if (err) throw err;
+      res.send(result);
+    });
+  });
 });
+//
 
 app.get("/", (req, res) => { // test the server
   res.send("server test");
 });
+
+
 
 var CsvSent;
 app.post("/api/save/", (req, res) => { // saves the array that the front end sent to the server as a variable
