@@ -22,7 +22,8 @@ function Navbar() { /*props is the data that we send to the this component*/
     return (
         <div class="navbar">
         <Logo class="logo" />
-        <button class="btn sign-out">sign out</button>
+        <h1 class="title" id="title">GRADE APP</h1>
+        <button class="btn sign-out" onClick={() => {toSignIn()}}>Sign Out</button>
         </div>)}
 
 
