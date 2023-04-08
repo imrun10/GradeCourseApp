@@ -35,7 +35,7 @@ export default function StudentDetail() {
           <div class="wrapper">
             <div id="content">
               {/* this is how we pass data to the table component */}
-              <Table />
+              <Table props={[{stud_id:123,stud_name:"imean",homework_avg:23,quiz_avg:13,midterm_avg:23,final_avg:31}]} code={3} />
             </div>
             <footer class="footer">
              

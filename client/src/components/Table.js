@@ -109,15 +109,14 @@ function Table(props) {
           <tbody class="table">
             {content.map((e) => (
               <tr
-                onClick={() => {
-                  toStudent(parseInt(e.no - 1));
-                }}
+                
+                
               >
                 {" "}
                 <th scope="row">{e.id}</th>{" "}
                 <td>{e.stud_id}</td>
                 <td>{e.stud_name}</td>
-                <td>{e.homwork_avg}</td>
+                <td>{e.homework_avg}</td>
                 <td>{e.quiz_avg}</td>
                 <td>{e.midterm_avg}</td>
                 <td>{e.final_avg}</td>

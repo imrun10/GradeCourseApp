@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import Adm from "./pages/Admin";
 import MainPage from "./pages/MainPage";
 import StudentDetail from "./pages/StudentDetail";
+import CourseDetails from "./pages/courseDetails";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,12 @@ const router = createBrowserRouter([
     //make the path url dynamic
     path:`/CoursePage/course`,
     element: <CoursePage />,
+  },
+
+  {
+    path:`/CoursePage/course/CourseDetails`,
+    element: <CourseDetails />,
+
   },
   {
     path: "app/course/student",
