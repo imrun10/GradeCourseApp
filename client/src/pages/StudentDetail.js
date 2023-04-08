@@ -35,6 +35,7 @@ export default function StudentDetail() {
           <div class="wrapper">
             <div id="content">
               {/* this is how we pass data to the table component */}
+              <Table />
             </div>
             <footer class="footer">
              
