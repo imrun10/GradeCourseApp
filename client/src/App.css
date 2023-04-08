@@ -1,7 +1,7 @@
 .App {
   text-align: center;
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 #title {
 
   font-family:Verdana, Geneva, Tahoma, sans-serif!important;
@@ -77,6 +77,15 @@ body {
    height :70px !important; 
    padding-bottom: 90px;
    background-color: transparent !important;
+}
+
+.sign-out {
+  font-family: 'Poppins';
+  font-style: regular;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 38px;
+  color: rgba(0, 51, 161, 0.8);
 }
 
 .title {

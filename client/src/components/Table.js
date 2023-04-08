@@ -10,47 +10,134 @@ function Table(props) {
     navigate("student", { state: props.props[i] }); // navigate to the student page and send the student data (props.props[i] [one specific student object]) to the student page
   };
 
+  function header(index) {
+    switch (index) {
+      case 1:
+        return (
+          <tr class="table">
+            <th scope="col">#</th> {/*this is the table headers*/}
+            <th scope="col">Student ID</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Quiz 1</th>
+            <th scope="col">Quiz 2</th>
+            <th scope="col">Quiz 3</th>
+            <th scope="col">Quiz 4</th>
+            <th scope="col">Homework 1</th>
+            <th scope="col">Homework 2</th>
+            <th scope="col">Midterm Exam</th>
+            <th scope="col">Final Exam</th>
+          </tr>
+        );
+      case 2:
+        return (
+        <tr class="table">
+        <th scope="col">#</th> {/*this is the table headers*/}
+        <th scope="col">Student ID</th>
+        <th scope="col">Student Name</th>
+        <th scope="col">Course % Grade</th>
+        <th scope="col">Course Letter Grade</th>
+      </tr>
+    );
+      case 3:
+        return (
+        <tr class="table">
+        <th scope="col">#</th> {/*this is the table headers*/}
+        <th scope="col">Student ID</th>
+        <th scope="col">Student Name</th>
+        <th scope="col">Avg Homework</th>
+        <th scope="col">Avg Quiz</th>
+        <th scope="col">Avg Midterm</th>
+        <th scope="col">Avg Final</th>
+        </tr>
+        )
+    default:
+      return(<div>TABLE NOT FOUND</div>)
+    }
+  }
+   
+  function body(index, content) {
+    switch (index) {
+      case 1:
+        return (
+          <tbody class="table">
+            {content.map((e) => (
+              <tr
+                onClick={() => {
+                  toStudent(parseInt(e.no - 1));
+                }}
+              >
+                {" "}
+                <th scope="row">{e.id}</th>{" "}
+                <td>{e.stud_id}</td>
+                <td>{e.stud_name}</td>
+                <td>{e.quiz_1}</td>
+                <td>{e.quiz_2}</td>
+                <td>{e.quiz_3}</td>
+                <td>{e.quiz_4}</td>
+                <td>{e.homework_1}</td>
+                <td>{e.homework_2}</td>
+                <td>{e.midterm}</td>
+
+                <td>{e.final}</td>
+              </tr>
+            ))}
+          </tbody>
+        );
+        break;
+      case 2:
+        return (
+          <tbody class="table">
+            {content.map((e) => (
+              <tr
+                onClick={() => {
+                  toStudent(parseInt(e.no - 1));
+                }}
+              >
+                {" "}
+                <th scope="row">{e.no}</th>{" "}
+                <td>{e.stud_id}</td>
+                <td>{e.stud_name}</td>
+                <td>{e.course_per}</td>
+                <td>{e.course_letter}</td>
+              </tr>
+            ))}
+          </tbody>
+        );
+        break;
+      case 3:
+        return (
+          <tbody class="table">
+            {content.map((e) => (
+              <tr
+                onClick={() => {
+                  toStudent(parseInt(e.no - 1));
+                }}
+              >
+                {" "}
+                <th scope="row">{e.id}</th>{" "}
+                <td>{e.stud_id}</td>
+                <td>{e.stud_name}</td>
+                <td>{e.homwork_avg}</td>
+                <td>{e.quiz_avg}</td>
+                <td>{e.midterm_avg}</td>
+                <td>{e.final_avg}</td>
+              </tr>
+            ))}
+          </tbody>
+        );
+
+      default:
+        return(<div>TABLE NOT FOUND</div>)
+        
+    }
+  }
+  
   return (
     <table class="table">
       {" "}
       {/*this is the table that will display the students data*/}
-      <thead>
-        <tr class="table">
-          <th scope="col">#</th> {/*this is the table headers*/}
-          <th scope="col">Name</th>
-          <th scope="col">ID</th>
-          <th scope="col">lab assignment</th>
-          <th scope="col">knowledge checks</th>
-          <th scope="col">tests</th>
-          <th scope="col">Participation</th>
-          <th scope="col">Final Grade</th>
-        </tr>
-      </thead>
-      <tbody class="table">
-        {" "}
-        {/*this is the table body that will display the students data*/}
-        {/*this is a map function that will loop through the students data and display it in the table*/}
-        {props.props.map((e) => (
-          <tr
-            onClick={() => {
-              toStudent(parseInt(e.no - 1));
-            }}
-          >
-            {" "}
-            {/*when the user click on the student row it will call the toStudent function and pass along the specific student data the user clicked on (parse int just turns string to int)*/}
-            {/*this is the table data*/}
-            <th scope="row">{e.no}</th>{" "}
-            {/*e represenrs the current object we are mapped to*/}
-            <td>{e.name}</td>
-            <td>{e.id}</td>
-            <td>{e.lab}</td>
-            <td>{e.knowledge}</td>
-            <td>{e.tests}</td>
-            <td>{e.participation}</td>
-            <td>{e.final}</td>
-          </tr>
-        ))}
-      </tbody>
+      <thead>{header(props.code)}</thead>
+      {body(props.code, props.props)}
     </table>
   );
 }

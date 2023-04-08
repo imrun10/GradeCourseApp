@@ -104,7 +104,7 @@ export default function CoursePage() {
         <body>
           <div class="wrapper">
             <div id="content">
-              <Table props={importedStudents} />{" "}
+              <Table props={importedStudents} code={1}/>{" "}
               {/* this is how we pass data to the table component */}
             </div>
             <footer class="footer">

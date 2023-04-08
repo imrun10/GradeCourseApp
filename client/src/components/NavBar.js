@@ -22,8 +22,7 @@ function Navbar() { /*props is the data that we send to the this component*/
     return (
         <div class="navbar">
         <Logo class="logo" />
-        <h1 class="title" id="title">GRADE APP</h1>
-        <button class="btn sign-out">Sign Out</button>
+        <button class="btn sign-out">sign out</button>
         </div>)}
 
 

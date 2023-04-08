@@ -8,18 +8,31 @@ import StudentSummaryPage from "./pages/StudentSummaryPage";
 import NotFound from "./pages/PageNotFound";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import Adm from "./pages/Admin";
+import MainPage from "./pages/MainPage";
+import StudentDetail from "./pages/StudentDetail";
 
 const router = createBrowserRouter([
   {
-    path: "app",
+    path: "coursePage",
     element: <App />,
+  },
+  {
+    path: "app",
+    element: <MainPage />,
+
+  },
+  {
+    path: "Students",
+    element: <StudentDetail />,
+
   },
   {
     path: "/",
     element: <SignIn />,
   },
   {
-    path: "/app/course",
+    //make the path url dynamic
+    path:`/CoursePage/course`,
     element: <CoursePage />,
   },
   {

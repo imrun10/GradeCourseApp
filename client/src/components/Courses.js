@@ -16,8 +16,28 @@ function Courses(props) { /*props is the data that we send to the this component
       navigate("course", {state: props}); // navigate to the course page and send the course data (props [object]) to the course page
     };
 
+    const toCoursPage = () => {
+
+        if (props.id === "Student"){
+            navigate("/Students");}
+        else{
+            navigate("/coursePage");
+        }
+        
+
+
+    }
+
+    const pickPage = () => {
+        if(props.code == 1){
+            toCoursPage()
+        }else{
+            toCourse()
+        }
+    }
+
     return (
-        <a onClick={()=>{ toCourse()}}>    {/*when the user click on the course card it will call the toCourse function*/}        
+        <a onClick={()=>{pickPage()}}>    {/*when the user click on the course card it will call the toCourse function*/}        
             <div class="card course-card border-transparent">
                 <div class="card-body">
                     <h5 class="card-title">{props.name}</h5>    {/*display the course name*/}
