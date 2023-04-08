@@ -101,7 +101,16 @@ app.get("/api/studentSummaryStudent", (req, res) => {
 })
 // get student assignments data from the database for the studentSummaryPage
 app.get("/api/studentSummaryAssignments", (req, res) => {
-  //database query here
+  con.connect(function(err) {
+    con.query(`select courseassignment.assignment_name , percentage,
+    min(Percentage), max(percentage), avg(percentage),courseassignment.assignment_weight 
+    from StudentGrade join CourseAssignment on 
+    StudentGrade.assignment_id = courseassignment.assignment_id 
+    group by courseassignment.assignment_name, courseassignment.assignment_weight, studentGrade.Percentage `, function (err, result, fields) {
+      if (err) throw err;
+      res.send(result);
+    });
+  });
   //AssignmentName, Grade, Min, Mean, Max, Weight
 })
 
