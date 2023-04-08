@@ -62,7 +62,9 @@ app.get("/api/student", (req, res) => { // get the students from the right cours
 
 app.get("/api/course", (req, res) => { // send the courses to the front end
   con.connect(function(err) {
-    con.query("SELECT * FROM Section", function (err, result, fields) {
+    con.query(`SELECT section_id, Course.course_code, course_name, Faculty_fname, 
+    Faculty_Lname FROM CourseSection inner join Course inner join Faculty
+    on coursesection.course_code = course.course_code and coursesection.instructor = faculty.faculty_id `, function (err, result, fields) {
       if (err) throw err;
       res.send(result);
     });
@@ -86,7 +88,15 @@ app.get("/api/checkArray", (req, res) => {  // check if the array is empty or no
 
 // get student data from the database for the studentSummaryPage
 app.get("/api/studentSummaryStudent", (req, res) => {
-  //database query here
+  con.connect(function(err) {
+    con.query(`select student.student_id, student_fname, student_lname, percentage, gpa 
+    from StudentGrade join Student join CourseAssignment 
+    on student.student_id = studentgrade.student_id and 
+    studentgrade.assignment_id =courseassignment.assignment_id `, function (err, result, fields) {
+      if (err) throw err;
+      res.send(result);
+    });
+  });
   //studentName, studentID, AssignmentGrade, GPA
 })
 // get student assignments data from the database for the studentSummaryPage
