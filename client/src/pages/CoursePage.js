@@ -26,12 +26,13 @@ export default function CoursePage() {
       // we send the name of the course so when parsing the test_student array we can get the right students for the right course
     },
   }).then((response) => setImportedStudents(response.data)); // we save the data we get from the backend in the importedStudents variable
+
   console.log(importedStudents); // this is just a console log to make sure the data was saved in the importedStudents variable
   function sendFile() {
     // this function will send the csv file to the backend
     Axios.post("http://localhost:3001/api/save/", {
-      arr: parsedData, // this is how we send data to the backend when using a post request, parsedData is an object, and you could add more objects or vars if you want after the comma but it has to be same format
-    }).then(console.log("SENT")); // this is just a console log to make sure the data was sent
+      arr: parsedData, id:location.state.id, // this is how we send data to the backend when using a post request, parsedData is an object, and you could add more objects or vars if you want after the comma but it has to be same format
+    }).then(alert("Sent")); // this is just a console log to make sure the data was sent
   }
 
   function showData() {
@@ -84,8 +85,27 @@ export default function CoursePage() {
 
 
   if(importedStudents === "MISSING"){
-    return (<header><Navbar /></header>, <Error1 />)
-  }
+    return (<div><Table></Table><input
+    class="btn btn-primary"
+    type="file"
+    name="file"
+    accept=".csv"
+    onChange={changeHandler} // this is how we call the function that converts the csv file to an array
+  />
+
+  <button
+    class="btn btn-primary"
+    style={{
+      backgroundColor: "RGB(100, 239, 100",
+      borderColor: "RGB(100, 239, 100)",
+    }}
+    onClick={(e) => {
+      sendFile();
+      showData();
+    }}
+  >
+    +
+  </button></div>)}
   else{
     return (
       <div>

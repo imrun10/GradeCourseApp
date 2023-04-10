@@ -29,7 +29,7 @@ function SignIn() {
     //Get entered email and password
     const enteredEmail = document.getElementsByTagName("input")[0].value;
     const enteredPassword = document.getElementsByTagName("input")[1].value;
-
+    let found = false;
     for (var i = 0; i < loginArr.length; i++) {
       //Check if an account with the entered email address exists in database
       if (loginArr[i].account_email === enteredEmail) {
@@ -42,9 +42,14 @@ function SignIn() {
             case 3: toLeadPage(); break; //Project Lead
             case 4: toRegistrarPage(); break; //Registrar
           }
-          break;
-        }
+          found = true;}
+         
+        
       }
+      
+      }
+      if (!found) {
+        alert("Incorrect email or password");
     }
   };
   

@@ -10,18 +10,10 @@ import Papa from "papaparse"; // papa parse is a library that allows us to parse
 import Navbar from "../components/NavBar";
 import Error1 from "../components/Error1";
 export default function StudentDetail() {
-  /*------------------------------- NOT DONE YET -------------------------------*/
-  //   function getStudent(x){
-  //     Axios.get("http://localhost:3001/api/show/").then((response)=>{
-  //       setStudent(response.data);
-  // })
-  //  }
 
-  //}
-  /*----------------------------------------------------------------------------*/
+  const [importedStudents, setImportedStudents] = useState([]); // this use state will help us save the data we get from the backend of all the students in the course the user clicked
 
-  /*------------------------------- Axios Requests -------------------------------*/
-
+  Axios.get("http://localhost:3001/api/studentDetails").then((response) => setImportedStudents(response.data)); // we save the data we get from the backend in the importedStudents variabl
     return (
       <div>
         <header>
@@ -35,7 +27,7 @@ export default function StudentDetail() {
           <div class="wrapper">
             <div id="content">
               {/* this is how we pass data to the table component */}
-              <Table props={[{stud_id:123,stud_name:"imean",homework_avg:23,quiz_avg:13,midterm_avg:23,final_avg:31}]} code={3} />
+              <Table props={importedStudents} code={2} />
             </div>
             <footer class="footer">
              

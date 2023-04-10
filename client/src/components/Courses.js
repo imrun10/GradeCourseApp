@@ -12,6 +12,7 @@ function Courses(props) { /*props is the data that we send to the this component
 
     
     const toCourse = () => {
+        console.log(props);
      
       navigate("course", {state: props}); // navigate to the course page and send the course data (props [object]) to the course page
     };

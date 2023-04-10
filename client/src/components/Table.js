@@ -30,31 +30,44 @@ function Table(props) {
         );
       case 2:
         return (
-        <tr class="table">
-        <th scope="col">#</th> {/*this is the table headers*/}
-        <th scope="col">Student ID</th>
-        <th scope="col">Student Name</th>
-        <th scope="col">Course % Grade</th>
-        <th scope="col">Course Letter Grade</th>
-      </tr>
-    );
+          <tr class="table">
+            <th scope="col">#</th> {/*this is the table headers*/}
+            <th scope="col">Student ID</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Course Name</th>
+            <th scope="col">Course % Grade</th>
+            <th scope="col">Course Letter Grade</th>
+          </tr>
+        );
       case 3:
         return (
-        <tr class="table">
-        <th scope="col">#</th> {/*this is the table headers*/}
-        <th scope="col">Student ID</th>
-        <th scope="col">Student Name</th>
-        <th scope="col">Avg Homework</th>
-        <th scope="col">Avg Quiz</th>
-        <th scope="col">Avg Midterm</th>
-        <th scope="col">Avg Final</th>
-        </tr>
-        )
-    default:
-      return(<div>TABLE NOT FOUND</div>)
+          <tr class="table">
+            <th scope="col">#</th> {/*this is the table headers*/}
+            <th scope="col">Student ID</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Avg Homework</th>
+            <th scope="col">Avg Quiz</th>
+            <th scope="col">Avg Midterm</th>
+            <th scope="col">Avg Final</th>
+          </tr>
+        );
+      default:
+        return <div>TABLE NOT FOUND</div>;
     }
   }
-   
+
+  function letterGrade(grade) {
+    if (grade >= 90) {
+      return "A";
+    } else if (grade >= 80) {
+      return "B";
+    } else if (grade >= 70) {
+      return "C";
+    } else if (grade >= 60) {
+      return "D";
+    } else {
+      return "F";
+    }}
   function body(index, content) {
     switch (index) {
       case 1:
@@ -67,9 +80,8 @@ function Table(props) {
                 }}
               >
                 {" "}
-                <th scope="row">{e.id}</th>{" "}
-                <td>{e.stud_id}</td>
-                <td>{e.stud_name}</td>
+                <th scope="row">{e.id}</th> <td>{e.student_id}</td>
+                <td>{e.student_fname}</td>
                 <td>{e.quiz_1}</td>
                 <td>{e.quiz_2}</td>
                 <td>{e.quiz_3}</td>
@@ -77,8 +89,7 @@ function Table(props) {
                 <td>{e.homework_1}</td>
                 <td>{e.homework_2}</td>
                 <td>{e.midterm}</td>
-
-                <td>{e.final}</td>
+                <td>{e.exam}</td>
               </tr>
             ))}
           </tbody>
@@ -94,11 +105,11 @@ function Table(props) {
                 }}
               >
                 {" "}
-                <th scope="row">{e.no}</th>{" "}
-                <td>{e.stud_id}</td>
-                <td>{e.stud_name}</td>
-                <td>{e.course_per}</td>
-                <td>{e.course_letter}</td>
+                <th scope="row">{e.no}</th> <td>{e.student_id}</td>
+                <td>{e.student_fname}</td>
+                <td>{e.course_name}</td>  
+                <td>{(0.2*(e.quiz_1 + e.quiz_2 + e.quiz_3 + e.quiz_4)/4)+(0.2*(e.homework_1 + e.homework_2)/2)+(0.3*(e.midterm))+(0.3*(e.exam))}</td>
+                <td>{letterGrade((0.2*(e.quiz_1 + e.quiz_2 + e.quiz_3 + e.quiz_4)/4)+(0.2*(e.homework_1 + e.homework_2)/2)+(0.3*(e.midterm))+(0.3*(e.exam)))}</td>
               </tr>
             ))}
           </tbody>
@@ -108,29 +119,24 @@ function Table(props) {
         return (
           <tbody class="table">
             {content.map((e) => (
-              <tr
-                
-                
-              >
+              <tr>
                 {" "}
-                <th scope="row">{e.id}</th>{" "}
-                <td>{e.stud_id}</td>
-                <td>{e.stud_name}</td>
-                <td>{e.homework_avg}</td>
-                <td>{e.quiz_avg}</td>
-                <td>{e.midterm_avg}</td>
-                <td>{e.final_avg}</td>
+                <th scope="row">{e.assignment_id}</th> <td>{e.student_id}</td>
+                <td>{e.student_fname}</td>
+                <td>{(e.homework_1 + e.homework_2) / 2}</td>
+                <td>{(e.quiz_1 + e.quiz_2 + e.quiz_3 + e.quiz_4) / 4}</td>
+                <td>{e.midterm}</td>
+                <td>{e.exam}</td>
               </tr>
             ))}
           </tbody>
         );
 
       default:
-        return(<div>TABLE NOT FOUND</div>)
-        
+        return <div>TABLE NOT FOUND</div>;
     }
   }
-  
+
   return (
     <table class="table">
       {" "}

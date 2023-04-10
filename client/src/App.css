@@ -66,8 +66,12 @@ body {
 }
 
 .content {
+
+
   /* Set margin-bottom to equal the height of the footer */
    margin-bottom:40px !important; 
+   
+ 
 }
 
 .footer {
@@ -96,11 +100,13 @@ body {
 
 .container {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 .item {
     flex-basis: 100px;
-    height: 100px;
-    margin: 20px;
+    height: 33.3%;
+    margin: 3%;
     min-width: 200px;
 
   }
