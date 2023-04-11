@@ -36,7 +36,7 @@ function findStudents(name, students) {
   for (var i = 0; i < students.length; i++) {
     if (students[i].course_name === name) {
       notfound = false;
-      console.log("found");
+      //console.log("found");
       foundStudents.push(students[i]);
     }
   }
@@ -53,9 +53,9 @@ app.get("/api/student", (req, res) => {
   // send the students to the front end
   con.connect(function (err) {
     con.query(
-      `SELECT Course.course_name, Student.student_id, Student.student_fname, quiz_1, quiz_2,quiz_3,quiz_4, homework_1,
-              homework_2, midterm, exam FROM Assignments inner join Course inner join Student on Assignments.course_code = course.course_code and Assignments.student_id
-              = Student.student_id`,
+      `select Course.course_name, Student.student_id, Student.student_fname, quiz_1, quiz_2,quiz_3,quiz_4, homework_1, homework_2, midterm, exam
+      FROM Assignments, Course, Student
+      where assignments.course_code = Course.course_code and student.student_id = assignments.student_id`,
       function (err, result, fields) {
         if (err) throw err;
         res.send(findStudents(name, result));
@@ -68,9 +68,9 @@ app.get("/api/studentDetails", (req, res) => {
   // send the students to the front end
   con.connect(function (err) {
     con.query(
-      `SELECT Course.course_name, Student.student_id, Student.student_fname, quiz_1, quiz_2,quiz_3,quiz_4, homework_1,
-              homework_2, midterm, exam FROM Assignments inner join Course inner join Student on Assignments.course_code = course.course_code and Assignments.student_id
-              = Student.student_id`,
+      `select Course.course_name, Student.student_id, Student.student_fname, quiz_1, quiz_2,quiz_3,quiz_4, homework_1, homework_2, midterm, exam
+      FROM Assignments, Course, Student
+      where assignments.course_code = Course.course_code and student.student_id = assignments.student_id`,
       function (err, result, fields) {
         if (err) throw err;
         res.send(result);
@@ -194,6 +194,19 @@ app.get("/api/studentSummaryAssignments", (req, res) => {
     );
   });
   //AssignmentName, Grade, Min, Mean, Max, Weight
+});
+
+// get account date from the database for the signin page
+app.get("/api/accountData", (req, res) => {
+  con.connect(function (err) {
+    con.query(`select account_email, account_password, account_type from account`,
+      function (err, result, fields) {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
+  });
+  //account_email, account_password, account_type
 });
 
 app.listen(3001, () => {
