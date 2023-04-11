@@ -6,7 +6,7 @@ import "../App.css"; // this is how we import css from other files
 import Navbar from "../components/NavBar"; // this is how we import css from other files
 function MainPage() {
  
-  const cards = [{CourseName: "View", CourseCode: "Student", FacultyName: "Detailes",code:1},{CourseName: "View", CourseCode: "Course", FacultyName: "Detailes",code:1},]
+  const cards = [{CourseName: "View", CourseCode: "Student", FacultyName: "Details",code:1},{CourseName: "View", CourseCode: "Course", FacultyName: "Details",code:1},]
   return (
     <div style={{ textAlign: "center" }}>
       <header>
