@@ -13,7 +13,7 @@ import Col from "react-bootstrap/Col";
 
 export default function CourseSummary() {
   const location = useLocation();
-  /*
+  //*
   const [courseInfo, setCourseInfo] = useState([]);
 
   Axios.get("http://localhost:3001/api/courseSummaryData", {
