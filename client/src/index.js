@@ -11,6 +11,7 @@ import Adm from "./pages/Admin";
 import MainPage from "./pages/MainPage";
 import StudentDetail from "./pages/StudentDetail";
 import CourseDetails from "./pages/courseDetails";
+import CourseSummary from "./pages/CourseSummary";
 
 const router = createBrowserRouter([
   {
@@ -38,21 +39,26 @@ const router = createBrowserRouter([
   },
 
   {
-    path:`/CoursePage/course/CourseDetails`,
+    path:`/CoursePage/course/courseDetails`,
     element: <CourseDetails />,
 
   },
   {
-    path: "app/course/student",
+    path: "/CoursePage/course/student",
     element: <StudentSummaryPage />,
   },
   {
+    path: "/CoursePage/course/summary",
+    element: <CourseSummary/>,
+  },
+  {
     path: "app/admin",
-    element: <Adm />,},
+    element: <Adm />,
+  },
   {
     path: "*",
     element: <NotFound />,
-  }
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

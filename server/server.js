@@ -209,6 +209,18 @@ app.get("/api/accountData", (req, res) => {
   //account_email, account_password, account_type
 });
 
+//Get course_name, course_code, avg_pass, avg_fail, course_outcomes for the course section from the database
+app.get("/api/courseSummaryData", (req, res) => {
+  con.connect(function (err) {
+    con.query(`select * from course join courseSection on course.course_code = courseSection.course_code`,
+      function (err, result, fields) {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
+  });
+});
+
 app.listen(3001, () => {
   // start the server
   console.log("listening on port 3001");
