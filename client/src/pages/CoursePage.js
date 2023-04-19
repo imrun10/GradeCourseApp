@@ -146,6 +146,7 @@ export default function CoursePage() {
                 +
               </button>
               <Link to='courseDetails' state = {location.state}><button class = "btn btn-primary sign-out" style = {{color:"white",fontSize:"20px"}} > Expand</button></Link>
+              <Link to='summary' state = {location.state}><button class = "btn btn-primary sign-out" style = {{color:"white",fontSize:"20px"}} > Summary</button></Link>
             </footer>
           </div>
         </body>

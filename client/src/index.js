@@ -18,6 +18,7 @@ import Adm from "./pages/Admin";
 import MainPage from "./pages/MainPage";
 import StudentDetail from "./pages/StudentDetail";
 import CourseDetails from "./pages/courseDetails";
+import CourseSummary from "./pages/CourseSummary";
 import { AuthProvider } from "react-auth-kit";
 import { RequireAuth } from "react-auth-kit";
 import { Routes } from "react-router-dom";
@@ -52,22 +53,25 @@ import SignUp from "./pages/signUp";
   },
 
   {
-    path: `/CoursePage/course/CourseDetails`,
+    path: `/CoursePage/course/courseDetails`,
     element: <CourseDetails />,
   },
   {
-    path: "/course/student",
+    path: "/CoursePage/course/student",
     element: <StudentSummaryPage />,
   },
   {
-    path: "/admin",
-    element: <Adm />,
+    path: "/CoursePage/course/summary",
+    element: <CourseSummary/>,
   },
+  {
+    path: "app/admin",
+    element: <Adm />,},
   {
     path: "*",
     element: <NotFound />,
-  },
-]); */
+  }
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -354,15 +354,40 @@ var security
     from StudentGrade join CourseAssignment on 
     StudentGrade.assignment_id = courseassignment.assignment_id 
     group by courseassignment.assignment_name, courseassignment.assignment_weight, studentGrade.Percentage `,
-        function (err, result, fields) {
-          if (err) throw err;
-          res.send(result);
-          console.log(result);
-        }
-      );
-    });
-    //AssignmentName, Grade, Min, Mean, Max, Weight
+      function (err, result, fields) {
+        if (err) throw err;
+        res.send(result);
+        console.log(result);
+      }
+    );
   });
+  //AssignmentName, Grade, Min, Mean, Max, Weight
+});
+
+// get account date from the database for the signin page
+app.get("/api/accountData", (req, res) => {
+  con.connect(function (err) {
+    con.query(`select account_email, account_password, account_type from account`,
+      function (err, result, fields) {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
+  });
+  //account_email, account_password, account_type
+});
+
+//Get course_name, course_code, avg_pass, avg_fail, course_outcomes for the course section from the database
+app.get("/api/courseSummaryData", (req, res) => {
+  con.connect(function (err) {
+    con.query(`select course_name, course.course_code, course_outcomes from course join courseSection on course.course_code = courseSection.course_code`,
+      function (err, result, fields) {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
+  });
+});
 
   app.listen(3001, () => {
     // start the server

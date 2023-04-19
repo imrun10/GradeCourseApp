@@ -24,12 +24,12 @@ function Navbar() { /*props is the data that we send to the this component*/
     };
     const toApp = () => {
      
-      navigate("app", ); // navigate to the course page and send the course data (props [object]) to the course page
+      navigate("/app", ); // navigate to the course page and send the course data (props [object]) to the course page
     };
 
     return (
         <div class="navbar">
-        <Logo class="logo" />
+        <Logo class="logo" onClick={()=>toApp()}/>
         <h1 class="title" id="title">GRADE APP</h1>
         <LogOut />
         </div>)}
