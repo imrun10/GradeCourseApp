@@ -9,8 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@userfront/react": "^0.3.3",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "jwtoken": "^0.0.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.22",
     "react-router-dom": "^6.9.0",
