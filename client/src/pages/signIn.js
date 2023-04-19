@@ -44,6 +44,10 @@ function Login() {
         alert("User Created Successfully");
         setCookie('token', response.data.token,[{path: '/'}]);
         setCookie('email', response.data.email,[{path: '/'}]);
+        setCookie('security', 1,[{path: '/'}]);
+
+        refreshPage();
+
       }
       else if(response.data.status === 2){
         alert("User Already Exist");
@@ -57,7 +61,9 @@ function Login() {
 
 })};
 
-
+function refreshPage(){
+  window.location.reload();
+} 
   const loggin = async () => {
     console.log("erq")
     alert("login");
@@ -68,7 +74,10 @@ function Login() {
       if(response.data.status === 1){
         alert("User Logged In Successfully");
         setCookie('email', response.data.email,[{path: '/'}]);
-        setCookie('token', response.data.token,[{path: '/'}]);
+        setCookie('token', response.data.token,[{path: '/'}])
+        setCookie('security', response.data.security,[{path: '/'}]);
+
+        refreshPage();
 
       }
       else if(response.data.status === 2){

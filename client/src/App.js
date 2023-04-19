@@ -4,11 +4,16 @@ import Courses from "./components/Courses"; // this is how we import components 
 import "bootstrap/dist/css/bootstrap.min.css"; // this is how we import bootstrap css
 import "./App.css"; // this is how we import css from other files
 import Navbar from "./components/NavBar"; // this is how we import css from other files
+import { useCookies } from "react-cookie"; // this is how we import cookies from other files
+
 function App() {
   const [importedCourses, setImportedCourses] = useState([]); // this use state will save a list of courses(object) that we get from the backend
 
+  //function to save the email cookie in a variabl called email cookie
+const{get,set,cookies}=useCookies(['email']);
+  
   // this is a get request to the backend, the backend will send a list of courses to the frontend, and the frontend will save the list in the importedCourses variable
-  Axios.get("http://localhost:3001/api/course/").then((response) => {
+  Axios.get("http://localhost:3001/api/course/",{}).then((response) => {
     setImportedCourses(response.data);
   });
 

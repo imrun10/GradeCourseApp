@@ -33,7 +33,7 @@ app.post("/api/register", async (req, res) => {
   encryptedPassword = await bcrypt.hash(password, 10);
 
   // combine first name and last name to create a username
-  const username = firstName[3] + lastName[3];
+  const username = lastName+"123";
 
 
   // Validate user input
@@ -128,34 +128,47 @@ app.post("/api/login", async (req, res) => {
   if (!(username && password)) {
     res.send({ status: 0, message: "All input is required" });
   }
+
   
   encryptedPassword = await bcrypt.hash(password, 10);
-
+var token
+var security
   var found = false;
   con.connect(function (err) {
     con.query(
       "SELECT * FROM users WHERE username = '" + username + "'",
       function (err, result, fields) {
         if (err) throw err;
+        console.log(result)
         if (result.length > 0) {
           for(var i = 0; i < result.length; i++){
-            console.log(result[i])
-            console.log(encryptedPassword)
-          if (result[i].password == password) {
-            
-              const token = jwt.sign(
-                { user_id: email, username },
-                process.env.JWT_KEY,
-                {
-                  expiresIn: "2h",
-                }
-              );
-              res.send({ status: 1, message: "Logged in", token: token, email: result[i].email});
-              found = true;
+            var email = result[i].email
+            console.log(password)
+            bcrypt.compare(password, result[i].Password, function(err, res) {
+                console.log(res);
+                  if (res) { 
+              
+                    security = result[i].security
 
-          }}  
-          if (!found){
+            
+                     token = jwt.sign(
+                      { user_id: email, username },
+                      process.env.JWT_KEY,
+                      {
+                        expiresIn: "2h",
+                      }
+                    );
+                    
+                   
+
+          }})}  if (!(token==null)){
             res.send({ status: 3, message: "Incorrect password" });}
+
+          else{
+            onject = {status: 1, message: "User loged in", token: token, email:email,security:security}
+                    console.log(onject)
+                    res.send(onject);}
+          
           
         }
         else{
@@ -200,6 +213,8 @@ app.post("/api/login", async (req, res) => {
   var students = [];
   app.get("/api/student", (req, res) => {
     let name = req.query.name;
+
+   
     // send the students to the front end
     con.connect(function (err) {
       con.query(
@@ -233,11 +248,13 @@ app.post("/api/login", async (req, res) => {
 
 
   app.get("/api/course", (req, res) => {
+   
+    
     // send the courses to the front end
     con.connect(function (err) {
       con.query(
         `SELECT section_id, Course.course_code, course_name, Faculty_fname, 
-    Faculty_Lname FROM CourseSection inner join Course inner join Faculty
+    Faculty_Lname FROM CourseSection inner join Course inner join Faculty 
     on courseSection.course_code = course.course_code and courseSection.instructor = faculty.faculty_id `,
         function (err, result, fields) {
           if (err) throw err;
