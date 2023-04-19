@@ -1,78 +1,124 @@
-import react from "react";
-import { useNavigate } from "react-router-dom"; // import the useNavigate function from react-router-dom that will help us route to other pages and pass data as we do it
-import './signin.css'
+import React, { useEffect } from "react";
+import "./login.css";
+import Userfront from "@userfront/react";
+import { useState } from "react";
+import axios from "axios";
+import { useCookies, Cookies } from 'react-cookie';
+import { useNavigate, redirect} from "react-router-dom";
 
-function SignIn() {
-  const navigate = useNavigate(); // intiales an instance of the useNavigate function and use this instance to route
+
+function Login() {
+
+  const [firstNameReg, setFirstNameReg] = useState();
+  const [lastNameReg, setLastNameReg] = useState();
+  const [passwordReg, setPasswordReg] = useState ();
+  const [emailReg, setEmailReg] = useState();
+
+  const [usernameLog, setUernameLog] = useState();
+  const [passwordLog, setPasswordLog] = useState ();
+  const [username, setUsername] = useState();
+  const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+
+ 
+  // redirect to main page if token cookies and email cookies are set
+  var emailCookie = cookies.email;
+  var tokenCookie = cookies.token;
+
+  useEffect(() => {
+    check();}
+    );
   
-  //Temporary arrays for testing user login information
-  const loginArr = [
-    {account_email:"it@aubh.edu.bh", account_password:"1a2b3c4d", account_type:1},
-    {account_email:"prof@aubh.edu.bh", account_password:"1234", account_type:2},
-    {account_email:"lead@aubh.edu.bh", account_password:"5678", account_type:3},
-    {account_email:"reg@aubh.edu.bh", account_password:"abcd", account_type:4}
-  ];
+    const check = () => {if(!(emailCookie == null || tokenCookie == null)){
+  navigate("/")}}
 
-  let userType = -1;
-
-  const toApp = () =>{  
-    navigate('App'); // take us to the App page
-  }
-
-  //Pages for different types...
-  const toInstructorPage = () => toApp();
-  const toLeadPage = () => toApp();
-  const toAdminPage = () => toApp();
-  const toRegistrarPage = () => toApp();
-
-  const checkLoginInformation=()=>{
-    //Get entered email and password
-    const enteredEmail = document.getElementsByTagName("input")[0].value;
-    const enteredPassword = document.getElementsByTagName("input")[1].value;
-    let found = false;
-    for (var i = 0; i < loginArr.length; i++) {
-      //Check if an account with the entered email address exists in database
-      if (loginArr[i].account_email === enteredEmail) {
-        //if the pasword is correct for this account, go to the next page
-        if (loginArr[i].account_password === enteredPassword) {
-          userType = loginArr[i].account_type;
-          switch (userType) {
-            case 1: toAdminPage(); break; //IT
-            case 2: toInstructorPage(); break; //Instructor
-            case 3: toLeadPage(); break; //Project Lead
-            case 4: toRegistrarPage(); break; //Registrar
-          }
-          found = true;}
-         
-        
+  const register = async () => {
+    alert("register");
+    const response = await axios.post("http://localhost:3001/api/register", {
+      firstName: firstNameReg,
+      lastName: lastNameReg,
+      email: emailReg,
+      password: passwordReg,
+    }).then((response) => {
+      if(response.data.status === 1){
+        alert("User Created Successfully");
+        setCookie('token', response.data.token,[{path: '/'}]);
+        setCookie('email', response.data.email,[{path: '/'}]);
       }
+      else if(response.data.status === 2){
+        alert("User Already Exist");
+      }
+      else if(response.data.status === 3){
+        alert("Password Already Exist");
+      }
+      else if(response.data.status === 0){
+        alert("Fill in all fields");
+      }
+
+})};
+
+
+  const loggin = async () => {
+    console.log("erq")
+    alert("login");
+    const responeL = await axios.post("http://localhost:3001/api/login", {
+      username: usernameLog,
+      password: passwordLog,
+    }).then((response) => {
+      if(response.data.status === 1){
+        alert("User Logged In Successfully");
+        setCookie('email', response.data.email,[{path: '/'}]);
+        setCookie('token', response.data.token,[{path: '/'}]);
+
+      }
+      else if(response.data.status === 2){
+        alert("User Does Not Exist");
+      }
+      else if(response.data.status === 3){
+        alert("Password Does Not Exist");
       
       }
-      if (!found) {
-        alert("Incorrect email or password");
-    }
-  };
-  
-  return(
-    <div>
-      <body>
-        <main>
-          <div class="row">
-            <div class="colm-form">
-              <div class="form-container">
-                <input type="text" placeholder="Email address or phone number" />
-                  <input type="password" placeholder="Password" />
-                    <button class="btn-login" onClick={() => {checkLoginInformation()}} >{/*when the user click on the login button it will call the toApp function*/} 
-                      Login
-                    </button>
-                    <a href="#">Forgotten password?</a>
-                  </div>
-              </div>
-            </div>
-        </main>
+      else if(response.data.status === 0){
+        alert("Fill in all fields");}
+      })
+  }
 
-      </body>
+  return (<div>
+    <div class="App">
+    <div class="registration">
+           <h1>Registration</h1>
+           <label>Email</label>
+           <input type="text" onChange={(e) =>{
+              setEmailReg(e.target.value);
+           }}  /><br/>
+           <label>First Name</label>
+           <input type="text" onChange={(e) =>{
+              setFirstNameReg(e.target.value);
+           }}  /><br/>
+            <label>Last Name</label>
+            <input type="text" onChange={(e) =>{
+              setLastNameReg(e.target.value);
+            }}  /><br/>
+           <label>password</label>
+           <input type="password" onChange={(e) =>{
+              setPasswordReg(e.target.value);
+           }} /> <br />
+           <button onClick={()=>{register()}}> Register</button>
+        </div>
+
+        <div class="login">
+           <h1>Login</h1>
+           <input type="text" placeholder="Username…" onChange={(e) =>{
+              setUernameLog(e.target.value);
+           }} /> <br/>
+           <input type="password" placeholder="Password…"onChange={(e) =>{
+              setPasswordLog(e.target.value);
+           }} /> <br />
+           <button onClick={()=>{loggin()}}>Login</button>
+        </div>
     </div>
-  )}
-  
-export default SignIn;
+  </div>);
+}
+
+
+export default Login;

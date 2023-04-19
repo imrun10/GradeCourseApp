@@ -2,61 +2,96 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import SignIn from "./pages/signIn";
 import CoursePage from "./pages/CoursePage";
 import StudentSummaryPage from "./pages/StudentSummaryPage";
 import NotFound from "./pages/PageNotFound";
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import Switch from "react-router-dom";
+import { CookiesProvider } from 'react-cookie';
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  BrowserRouter,
+} from "react-router-dom";
 import Adm from "./pages/Admin";
 import MainPage from "./pages/MainPage";
 import StudentDetail from "./pages/StudentDetail";
 import CourseDetails from "./pages/courseDetails";
+import { AuthProvider } from "react-auth-kit";
+import { RequireAuth } from "react-auth-kit";
+import { Routes } from "react-router-dom";
+import  Login  from "./pages/signIn";
+import SignUp from "./pages/signUp";
 
-const router = createBrowserRouter([
+/*const router = createBrowserRouter([
   {
     path: "coursePage",
     element: <App />,
   },
   {
-    path: "app",
-    element: <MainPage />,
-
+    path: "/",
+    element: (
+      <RequireAuth loginPath="/login">
+        <MainPage />
+      </RequireAuth>
+    ),
   },
   {
     path: "Students",
     element: <StudentDetail />,
-
   },
   {
-    path: "/",
+    path: "/login",
     element: <SignIn />,
   },
   {
     //make the path url dynamic
-    path:`/CoursePage/course`,
+    path: `/CoursePage/course`,
     element: <CoursePage />,
   },
 
   {
-    path:`/CoursePage/course/CourseDetails`,
+    path: `/CoursePage/course/CourseDetails`,
     element: <CourseDetails />,
-
   },
   {
-    path: "app/course/student",
+    path: "/course/student",
     element: <StudentSummaryPage />,
   },
   {
-    path: "app/admin",
-    element: <Adm />,},
+    path: "/admin",
+    element: <Adm />,
+  },
   {
     path: "*",
     element: <NotFound />,
-  }
-]);
+  },
+]); */
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={router} />);
+root.render(
+  <React.StrictMode>
+    <CookiesProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/coursePage" element={<App />} />
+        <Route path="/coursePage/course" element={<CoursePage />} />
+        <Route path="/coursePage/course/CourseDetails" element={<CourseDetails />} />
+        <Route path="/course/student" element={<StudentSummaryPage />} />
+        <Route path="/admin" element={<Adm />} />
+        <Route path="/Students" element={<StudentDetail />} />
+        <Route path="/course/student" element={<StudentSummaryPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+    </CookiesProvider>
+ 
+  </React.StrictMode>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

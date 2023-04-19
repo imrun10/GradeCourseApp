@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"; // importing react-router-dom so
 import { ReactComponent as Logo } from '../media/AUBH-Logo.svg'; // this is how we import svg files
 
 import '../App.css' // importing css file
-
+import LogOut from './LogOut'; // importing the logout component
 function Navbar() { /*props is the data that we send to the this component*/
     const navigate = useNavigate(); // intiales an instance of the useNavigate function and use this instance to route
 
@@ -23,7 +23,7 @@ function Navbar() { /*props is the data that we send to the this component*/
         <div class="navbar">
         <Logo class="logo" />
         <h1 class="title" id="title">GRADE APP</h1>
-        <button class="btn sign-out" onClick={() => {toSignIn()}}>sign out</button>
+        <LogOut />
         </div>)}
 
 
