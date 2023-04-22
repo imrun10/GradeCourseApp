@@ -2,14 +2,13 @@ import react from "react";
 import { useLocation, useNavigate, Link} from "react-router-dom"; // useLocation will allow us to use data sent from other pages when they link here
 import Axios from "axios"; // Axios is a HTTP client for the browser and node.js (send data to backend)
 import { useState } from "react"; // useState is a hook that allows us to use variables in the html portoin of the code
-import "../App.css";
+import "../../App.css";
 
-import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Table from "../components/Table"; // table component
+import Table from "../../components/Tables/Table"; // table component
 import Papa from "papaparse"; // papa parse is a library that allows us to parse csv files
-import Navbar from "../components/NavBar";
-import Error1 from "../components/Error1";
+import Navbar from "../../components/NavBar/NavBar";
+import Error1 from "../../components/ErrorPages/Error1";
 export default function CoursePage() {
   const location = useLocation(); // we create and instance of this function and use it to get the data sent from the previous page
   const [importedStudents, setImportedStudents] = useState([]); // this use state will help us save the data we get from the backend of all the students in the course the user clicked

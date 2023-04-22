@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import CoursePage from "./pages/CoursePage";
-import StudentSummaryPage from "./pages/StudentSummaryPage";
-import NotFound from "./pages/PageNotFound";
+import CoursePage from "./pages/Courses/CoursePage";
+import StudentSummaryPage from "./pages/students/StudentSummaryPage";
+import NotFound from "./pages/Admin/PageNotFound";
 import Switch from "react-router-dom";
 import { CookiesProvider } from 'react-cookie';
 
@@ -14,16 +14,15 @@ import {
   Route,
   BrowserRouter,
 } from "react-router-dom";
-import Adm from "./pages/Admin";
+import Adm from "./pages/Admin/Admin";
 import MainPage from "./pages/MainPage";
-import StudentDetail from "./pages/StudentDetail";
-import CourseDetails from "./pages/courseDetails";
-import CourseSummary from "./pages/CourseSummary";
+import StudentDetail from "./pages/students/StudentDetail";
+import CourseDetails from "./pages/Courses/courseDetails";
+import CourseSummary from "./pages/Courses/CourseSummary";
 import { AuthProvider } from "react-auth-kit";
 import { RequireAuth } from "react-auth-kit";
 import { Routes } from "react-router-dom";
-import  Login  from "./pages/signIn";
-import SignUp from "./pages/signUp";
+import  Login  from "./pages/Admin/signIn";
 
 /*const router = createBrowserRouter([
   {
@@ -81,7 +80,6 @@ root.render(
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
         <Route path="/coursePage" element={<App />} />
         <Route path="/coursePage/course" element={<CoursePage />} />
         <Route path="/coursePage/course/CourseDetails" element={<CourseDetails />} />

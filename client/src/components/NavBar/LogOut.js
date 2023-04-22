@@ -1,10 +1,10 @@
-import React from "react";
-import Userfront from "@userfront/react";
-import { useCookies, Cookies } from 'react-cookie';
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./componentsCSS.css"
-import '../App.css' // importing css file
+import React from "react";
+import { useCookies } from 'react-cookie';
+import '../style/componentsCSS.css'; // importing css file
 
+//import app.css file
+import "../../App.css"
 
 function LogOut() {
   // removws cookies when logout button is clicked

@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import "./login.css";
-import Userfront from "@userfront/react";
 import { useState } from "react";
 import axios from "axios";
 import { useCookies, Cookies } from 'react-cookie';
 import { useNavigate, redirect} from "react-router-dom";
+import "../../App.css";
 
 
 function Login() {
@@ -16,7 +15,6 @@ function Login() {
 
   const [usernameLog, setUernameLog] = useState();
   const [passwordLog, setPasswordLog] = useState ();
-  const [username, setUsername] = useState();
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
 

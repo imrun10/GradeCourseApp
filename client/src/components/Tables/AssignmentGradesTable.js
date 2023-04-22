@@ -1,10 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
 
-import "./componentsCSS.css";
+import '../style/componentsCSS.css' // importing css file
 
 function AssignmentTable(props) {
-  const navigate = useNavigate();
 
   return (
     <table class="table">

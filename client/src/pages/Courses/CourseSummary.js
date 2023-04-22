@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import { useLocation, Link } from "react-router-dom"; // useLocation will allow us to use data sent from other pages when they link here
-import "../App.css";
-import "./style.css";
+import "../../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "../components/NavBar";
-import Error1 from "../components/Error1";
+import Navbar from "../../components/NavBar/NavBar";
+import Error1 from "../../components/ErrorPages/Error1";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

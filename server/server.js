@@ -198,7 +198,6 @@ var security
     for (var i = 0; i < students.length; i++) {
       if (students[i].course_name === name) {
         notfound = false;
-        console.log("found");
         foundStudents.push(students[i]);
       }
     }

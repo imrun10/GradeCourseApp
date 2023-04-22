@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // importing bootstrap
 import { useNavigate } from "react-router-dom"; // importing react-router-dom so we can link to other pages with data
  
 
-import './componentsCSS.css' // importing css file
+import './style/componentsCSS.css' // importing css file
 
 function Courses(props) { /*props is the data that we send to the this component*/
     const navigate = useNavigate(); // intiales an instance of the useNavigate function and use this instance to route

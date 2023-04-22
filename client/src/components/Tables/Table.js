@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 
-import "./componentsCSS.css";
+import '../style/componentsCSS.css' // importing css file
 
 function Table(props) {
   const navigate = useNavigate(); // look at courses.js to find out what we are doing here
@@ -68,6 +68,7 @@ function Table(props) {
     } else {
       return "F";
     }}
+  
   function body(index, content) {
     switch (index) {
       case 1:

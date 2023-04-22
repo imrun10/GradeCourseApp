@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import "./StudentSummaryPage.css";
 import { NavigationType, useLocation } from "react-router-dom";
-import StudentTable from "../components/StudentTable";
-import AssignmentGradesTable from "../components/AssignmentGradesTable";
+import StudentTable from "../../components/Tables/Table";
+import AssignmentGradesTable from "../../components/Tables/AssignmentGradesTable";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/NavBar"; // this is how we import css from other files
-import "./style.css"
+import Navbar from "../../components/NavBar/NavBar"; // this is how we import css from other files
+import "../../App.css";
 function StudentSummaryPage() {
   const navigate = useNavigate();
   const location = useLocation();

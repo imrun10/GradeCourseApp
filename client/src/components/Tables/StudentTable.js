@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 
-import "./componentsCSS.css";
+import '../style/componentsCSS.css' // importing css file
 
 function StudentTable(props) {
   const navigate = useNavigate();
