@@ -24,53 +24,6 @@ import { RequireAuth } from "react-auth-kit";
 import { Routes } from "react-router-dom";
 import  Login  from "./pages/Admin/signIn";
 
-/*const router = createBrowserRouter([
-  {
-    path: "coursePage",
-    element: <App />,
-  },
-  {
-    path: "/",
-    element: (
-      <RequireAuth loginPath="/login">
-        <MainPage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "Students",
-    element: <StudentDetail />,
-  },
-  {
-    path: "/login",
-    element: <SignIn />,
-  },
-  {
-    //make the path url dynamic
-    path: `/CoursePage/course`,
-    element: <CoursePage />,
-  },
-
-  {
-    path: `/CoursePage/course/courseDetails`,
-    element: <CourseDetails />,
-  },
-  {
-    path: "/CoursePage/course/student",
-    element: <StudentSummaryPage />,
-  },
-  {
-    path: "/CoursePage/course/summary",
-    element: <CourseSummary/>,
-  },
-  {
-    path: "app/admin",
-    element: <Adm />,},
-  {
-    path: "*",
-    element: <NotFound />,
-  }
-]); */
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -87,7 +40,7 @@ root.render(
         <Route path="/admin" element={<Adm />} />
         <Route path="/Students" element={<StudentDetail />} />
         <Route path="/coursePage/course/summary" element={<CourseSummary />} />
-        <Route path="/CoursePage/course/student" element={<StudentSummaryPage />} />
+       {/* <Route path="/CoursePage/course/student" element={<StudentSummaryPage />} />*/}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
