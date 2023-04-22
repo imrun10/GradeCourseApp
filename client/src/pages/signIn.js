@@ -75,7 +75,6 @@ function refreshPage(){
         alert("User Logged In Successfully");
         setCookie('email', response.data.email,[{path: '/'}]);
         setCookie('token', response.data.token,[{path: '/'}])
-        setCookie('security', response.data.security,[{path: '/'}]);
 
         refreshPage();
 

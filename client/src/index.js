@@ -71,7 +71,7 @@ import SignUp from "./pages/signUp";
     path: "*",
     element: <NotFound />,
   }
-]);
+]); */
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -88,7 +88,8 @@ root.render(
         <Route path="/course/student" element={<StudentSummaryPage />} />
         <Route path="/admin" element={<Adm />} />
         <Route path="/Students" element={<StudentDetail />} />
-        <Route path="/course/student" element={<StudentSummaryPage />} />
+        <Route path="/coursePage/course/summary" element={<CourseSummary />} />
+        <Route path="/CoursePage/course/student" element={<StudentSummaryPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

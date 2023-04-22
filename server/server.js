@@ -148,7 +148,6 @@ var security
                 console.log(res);
                   if (res) { 
               
-                    security = result[i].security
 
             
                      token = jwt.sign(
@@ -165,7 +164,7 @@ var security
             res.send({ status: 3, message: "Incorrect password" });}
 
           else{
-            onject = {status: 1, message: "User loged in", token: token, email:email,security:security}
+            onject = {status: 1, message: "User loged in", token: token, email:email}
                     console.log(onject)
                     res.send(onject);}
           
@@ -380,7 +379,7 @@ app.get("/api/accountData", (req, res) => {
 //Get course_name, course_code, avg_pass, avg_fail, course_outcomes for the course section from the database
 app.get("/api/courseSummaryData", (req, res) => {
   con.connect(function (err) {
-    con.query(`select course_name, course.course_code, course_outcomes from course join courseSection on course.course_code = courseSection.course_code`,
+    con.query(`select course_name, course.course_code from course join courseSection on course.course_code = courseSection.course_code`,
       function (err, result, fields) {
         if (err) throw err;
         res.send(result);

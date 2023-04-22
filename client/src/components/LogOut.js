@@ -3,6 +3,7 @@ import Userfront from "@userfront/react";
 import { useCookies, Cookies } from 'react-cookie';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./componentsCSS.css"
+import '../App.css' // importing css file
 
 
 function LogOut() {
@@ -18,7 +19,7 @@ function LogOut() {
     refreshPage();
   }
   
-  return <button class="btn .course-card .card-body" onClick={()=>{remove()}}>LogOut</button>
+  return <button class="btn .course-card .card-body " onClick={()=>{remove()}}>LogOut</button>
 }
 
 export default LogOut;
