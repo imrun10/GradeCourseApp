@@ -8,8 +8,7 @@ import { useNavigate } from "react-router-dom"; // import the useNavigate functi
 function NotFound() {
   const navigate = useNavigate();
   
-  const toApp = () => {
-    navigate("/");} //fixed "Go Home" link
+  const toApp = () => {navigate("/");} //fixed "Go Home" link
 
     return (
       <div>
