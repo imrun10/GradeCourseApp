@@ -6,18 +6,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "../../components/NavBar/NavBar";
 import Error1 from "../../components/ErrorPages/Error1";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
 export default function CourseSummary() {
   const location = useLocation();
   //*
   // Stores course data from backend
   const [courseInfo, setCourseInfo] = useState([]);
   
-  Axios.get("http://localhost:3001/api/courseSummaryData", {
-  }).then((response) => setCourseInfo(response.data));
+  Axios.get("http://localhost:3001/api/courseSummaryData").then((response) => setCourseInfo(response.data));
 
   /*/
   const courseInfo = {
@@ -42,11 +37,10 @@ export default function CourseSummary() {
         <body>
           <div class="wrapper">
             <div id="content">
-              Course Name: {courseInfo.name} <br/>
-              Course Code: {courseInfo.code} <br/>
-              Average Pass Rate: {courseInfo.passRate} <br/>
-              Average Fail Rate: {courseInfo.failRate} <br/>
-              Course Outcomes: {courseInfo.courseOutcomes} <br/>
+              <b>Course Name: </b> {courseInfo.name} <br/>
+              <b>Course Code: </b> {courseInfo.code} <br/>
+              <b>Average Pass Rate: </b> {courseInfo.passRate} <b>Average Fail Rate: </b> {courseInfo.failRate} <br/>
+              <b>Course Outcomes: </b> {courseInfo.courseOutcomes} <br/>
             </div>
 
             <footer class="footer">
