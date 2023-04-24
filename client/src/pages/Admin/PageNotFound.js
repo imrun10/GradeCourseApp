@@ -9,7 +9,7 @@ function NotFound() {
   const navigate = useNavigate();
   
   const toApp = () => {
-    navigate("App");}
+    navigate("/");} //fixed "Go Home" link
 
     return (
       <div>
