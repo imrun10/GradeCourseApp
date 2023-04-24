@@ -13,8 +13,9 @@ import Col from "react-bootstrap/Col";
 export default function CourseSummary() {
   const location = useLocation();
   //*
+  // Stores course data from backend
   const [courseInfo, setCourseInfo] = useState([]);
-
+  
   Axios.get("http://localhost:3001/api/courseSummaryData", {
   }).then((response) => setCourseInfo(response.data));
 
@@ -41,19 +42,11 @@ export default function CourseSummary() {
         <body>
           <div class="wrapper">
             <div id="content">
-              <Container fluid>
-                <Row>
-                  <Col>Course Name:</Col><Col>{location.state.name}</Col>
-                  <Col>Course Code:</Col><Col>{location.state.id}</Col>
-                </Row>
-                <Row>
-                  <Col>Average Pass Rate: </Col><Col>{courseInfo.avg_pass}</Col>
-                  <Col>Average Fail Rate: </Col><Col>{courseInfo.avg_fail}</Col>
-                </Row>
-                <Row>
-                  <Col>Course Outcomes:</Col><Col>{courseInfo.course_outcomes}</Col>
-                </Row>
-              </Container>
+              Course Name: {courseInfo.name} <br/>
+              Course Code: {courseInfo.code} <br/>
+              Average Pass Rate: {courseInfo.passRate} <br/>
+              Average Fail Rate: {courseInfo.failRate} <br/>
+              Course Outcomes: {courseInfo.courseOutcomes} <br/>
             </div>
 
             <footer class="footer">
