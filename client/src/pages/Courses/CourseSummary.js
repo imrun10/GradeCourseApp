@@ -12,17 +12,19 @@ export default function CourseSummary() {
   // Stores course data from backend
   const [courseInfo, setCourseInfo] = useState([]);
   
-  Axios.get("http://localhost:3001/api/courseSummaryData").then((response) => setCourseInfo(response.data));
+  if (!courseInfo) {
+    Axios.get("http://localhost:3001/api/courseSummaryData").then((response) => setCourseInfo(response.data));
 
-  /*/
-  const courseInfo = {
-      course_name: location.state.name,
-      course_code: location.state.id,
-      avg_pass: "100 %",
-      avg_fail: "0 %",
-      course_outcomes: "course description goes here..."
+  }
+
+  /*
+  const testCourseInfo = {
+      course_name: Full Course Name,
+      course_code: COURSECODE,
+      avg_pass: "100 %"         avg_fail: "0 %",
+      course_outcomes: Course description goes here...
   };
-  //*/
+  */
 
   if(courseInfo === "MISSING"){
     return (<header><Navbar /></header>, <Error1 />)
@@ -44,8 +46,8 @@ export default function CourseSummary() {
             </div>
 
             <footer class="footer">
-            <Link to="/coursePage/course" state ={location.state}><button class = "btn sign-out">Go back</button></Link>
-            <Link to="" state ={location.state}><button class = "btn sign-out">Download</button></Link>
+            <Link to="/coursePage/course" state ={location.state}><button class = "btn btn-primary">Go back</button></Link>
+            <Link to="" state ={location.state}><button class = "btn btn-primary">Download</button></Link>
             </footer>
 
           </div>
