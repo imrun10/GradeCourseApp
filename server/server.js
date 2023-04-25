@@ -382,9 +382,10 @@ app.get("/api/accountData", (req, res) => {
 //Get course_name, course_code, avg_pass, avg_fail, course_outcomes for the course section from the database
 app.get("/api/courseSummaryData", (req, res) => {
   con.connect(function (err) {
-    con.query(`select course_name, course.course_code from course join courseSection on course.course_code = courseSection.course_code`,
+    con.query(`select c.course_code as code, c.course_name as name, c.outcomes from course c join courseSection cs on c.course_code = cs.course_code;`,
       function (err, result, fields) {
         if (err) throw err;
+        console.log(result);
         res.send(result);
       }
     );
