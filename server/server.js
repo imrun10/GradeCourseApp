@@ -41,6 +41,8 @@ app.post("/api/register", async (req, res) => {
     res.send({ status: 0, message: "All input is required" });
   }
 
+  
+
   // check if user already exist
   // Validate if user exist in our database
   var oldUser = false;
