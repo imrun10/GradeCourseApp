@@ -12,10 +12,7 @@ export default function CourseSummary() {
   // Stores course data from backend
   const [courseInfo, setCourseInfo] = useState([]);
   
-  if (!courseInfo) {
-    Axios.get("http://localhost:3001/api/courseSummaryData").then((response) => setCourseInfo(response.data));
-
-  }
+  //Axios.get("http://localhost:3001/api/courseSummaryData").then((response) => setCourseInfo(response.data));
 
   /*
   const testCourseInfo = {
@@ -38,6 +35,7 @@ export default function CourseSummary() {
 
         <body>
           <div class="wrapper">
+
             <div id="content">
               <b>Course Name: </b> {courseInfo.name} <br/>
               <b>Course Code: </b> {courseInfo.code} <br/>
