@@ -36,9 +36,10 @@ root.render(
         <Route path="/coursePage" element={<App />} />
         <Route path="/coursePage/course" element={<CoursePage />} />
         <Route path="/coursePage/course/CourseDetails" element={<CourseDetails />} />
-        <Route path="/course/student" element={<StudentSummaryPage />} />
+        <Route path="/coursePage/course/student" element={<StudentSummaryPage />} />
         <Route path="/admin" element={<Adm />} />
         <Route path="/Students" element={<StudentDetail />} />
+        <Route path="/Students/student" element={<StudentSummaryPage />} />
         <Route path="/coursePage/course/summary" element={<CourseSummary />} />
        {/* <Route path="/CoursePage/course/student" element={<StudentSummaryPage />} />*/}
         <Route path="*" element={<NotFound />} />
