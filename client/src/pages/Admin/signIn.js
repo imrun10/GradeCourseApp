@@ -27,8 +27,18 @@ function Login() {
     check();}
     );
   
-    const check = () => {if(!(emailCookie == null || tokenCookie == null)){
-  navigate("/")}}
+    const check = async() => {
+      // axios to get priority level from user
+      const response = await axios.post("http://localhost:3001/api/getTag", {
+        email: emailCookie,
+        token: tokenCookie,
+      }).then((response) => {
+        if(response.data.tag === 1){
+          navigate("/");
+        }
+        else if(response.data.tag === 3){
+          alert("/admin");
+      }
 
   const register = async () => {
     alert("register");
