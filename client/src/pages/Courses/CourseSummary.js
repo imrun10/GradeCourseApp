@@ -8,24 +8,18 @@ import Error1 from "../../components/ErrorPages/Error1";
 
 export default function CourseSummary() {
   const location = useLocation();
-  //*
-  // Stores course data from backend
   const [courseList, setCourseList] = useState([]);
-  const getCourseList = () => { 
+  
+  const getCourseList = async () => { 
     return (Axios.get("http://localhost:3001/api/courseSummaryData", {
-    }).then((response) => {setCourseList(response.data)}));
+    }).then((response) => {
+      setCourseList(response.data);
+    }));
   }
-  var thisCourse;
+
   useEffect(() => {
     getCourseList();
-    var _current;
-    for (var i = 0; i < courseList.length; i++) {
-      _current = courseList[i];
-      if (_current.code === location.state.id) {
-        thisCourse = _current;
-        break;
-      }
-    }
+
   }, []);
 
   /*
@@ -54,9 +48,10 @@ export default function CourseSummary() {
               {courseList.map((course, index) => {
                 return (
                   <div>
-                  <p><b>Course Name : </b>{course.name}</p>
-                  <p><b>Course Code : </b>{course.code}</p>
-                  <p><b>Course Outcomes : </b>{course.outcomes}</p>
+                  <p><b>Course Name: </b>{course.course_name}</p>
+                  <p><b>Course Code: </b>{course.course_code}</p>
+                  <p><b>Pass Rate: </b>{course.pass_rate} <b>Fail Rate: </b>{course.fail_rate}</p>
+                  <p><b>Course Outcomes: </b>{course.outcomes}</p>
                   </div>
                 );
               })}

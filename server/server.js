@@ -381,7 +381,7 @@ app.get("/api/accountData", (req, res) => {
 
 //Get course_name, course_code, avg_pass, avg_fail, course_outcomes for the course section from the database
 app.get("/api/courseSummaryData", (req, res) => {
-  var sql = `select c.course_code, c.course_name, c.outcomes from course c where course_code = ?;`;
+  var sql = `select c.course_code, c.course_name, c.outcomes from course c where (c.course_code = ?)`;
   con.query(sql, [code],
     function (err, result, fields) {
       if (err) {
