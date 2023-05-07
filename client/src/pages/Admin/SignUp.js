@@ -1,3 +1,7 @@
+// set this up to be similar to signIn.js
+
+
+
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
@@ -6,7 +10,7 @@ import { useNavigate, redirect} from "react-router-dom";
 import "../../App.css";
 
 
-function Login() {
+function Register() {
 
   const [firstNameReg, setFirstNameReg] = useState();
   const [lastNameReg, setLastNameReg] = useState();
@@ -69,13 +73,10 @@ function refreshPage(){
       username: usernameLog,
       password: passwordLog,
     }).then((response) => {
-      console.log(response.data);
-      if(response.data.token != null){
+      if(response.data.status === 1){
         alert("User Logged In Successfully");
         setCookie('email', response.data.email,[{path: '/'}]);
         setCookie('token', response.data.token,[{path: '/'}])
-        setCookie('security', response.data.security,[{path: '/'}])
-
 
         refreshPage();
 
@@ -94,21 +95,30 @@ function refreshPage(){
 
   return (<div>
     <div class="App">
-   
-
-        <div class="login">
-           <h1>Login</h1>
-           <input type="text" placeholder="Username…" onChange={(e) =>{
-              setUernameLog(e.target.value);
-           }} /> <br/>
-           <input type="password" placeholder="Password…"onChange={(e) =>{
-              setPasswordLog(e.target.value);
+    <div class="registration">
+           <h1>Registration</h1>
+           <label>Email</label>
+           <input type="text" onChange={(e) =>{
+              setEmailReg(e.target.value);
+           }}  /><br/>
+           <label>First Name</label>
+           <input type="text" onChange={(e) =>{
+              setFirstNameReg(e.target.value);
+           }}  /><br/>
+            <label>Last Name</label>
+            <input type="text" onChange={(e) =>{
+              setLastNameReg(e.target.value);
+            }}  /><br/>
+           <label>password</label>
+           <input type="password" onChange={(e) =>{
+              setPasswordReg(e.target.value);
            }} /> <br />
-           <button onClick={()=>{loggin()}}>Login</button>
+           <button onClick={()=>{register()}}> Register</button>
         </div>
+
     </div>
   </div>);
 }
 
 
-export default Login;
+export default Register;

@@ -55,7 +55,7 @@ app.post("/api/register", async (req, res) => {
   )
   con.connect(function (err) {
     con.query(
-      `SELECT email, Password FROM Users`,
+      `CALL GetEmailPass()`,
       function (err, result, fields) {
         if (err) throw err;
         for (var i = 0; i < result.length; i++) {
@@ -76,7 +76,7 @@ app.post("/api/register", async (req, res) => {
         else if (!oldUser && !oldPassword) {
           // Create user in our database
           con.query(
-            "INSERT INTO users (firstName, lastName, email, userName, password) VALUES ('" +
+            "call insertusers('" +
             firstName +
             "', '" +
             lastName +
@@ -131,7 +131,7 @@ app.post("/api/login", async (req, res) => {
     res.send({ status: 0, message: "All input is required" });
   }
 
-  var PriorityLevel;
+  
   encryptedPassword = await bcrypt.hash(password, 10);
 var token
 var security
@@ -141,27 +141,34 @@ var security
       "SELECT * FROM users WHERE username = '" + username + "'",
       function (err, result, fields) {
         if (err) throw err;
-
-        console.log(result);
+        console.log(result)
         if (result.length > 0) {
           for(var i = 0; i < result.length; i++){
             var email = result[i].email
-            PriorityLevel = result[i].PriorityLevel;
-            const token = jwt.sign(
-              { user_id: email, username },
-              process.env.JWT_KEY,
-              {
-                expiresIn: "2h",
-              }
-            );
-            onject = {message: "User loged in", token: token, email:email, security:PriorityLevel}
-                    console.log(onject)
-                    res.send(onject);
             console.log(password)
+            bcrypt.compare(password, result[i].Password, function(err, res) {
+                console.log(res);
+                  if (res) { 
+              
+
             
-        }  if (!(token==null)){
+                     token = jwt.sign(
+                      { user_id: email, username },
+                      process.env.JWT_KEY,
+                      {
+                        expiresIn: "2h",
+                      }
+                    );
+                    
+                   
+
+          }})}  if (!(token==null)){
             res.send({ status: 3, message: "Incorrect password" });}
 
+          else{
+            onject = {status: 1, message: "User loged in", token: token, email:email}
+                    console.log(onject)
+                    res.send(onject);}
           
           
         }
@@ -213,9 +220,7 @@ var security
     // send the students to the front end
     con.connect(function (err) {
       con.query(
-        `SELECT Course.course_name, Student.student_id, Student.student_fname, quiz_1, quiz_2,quiz_3,quiz_4, homework_1,
-              homework_2, midterm, exam FROM Assignments inner join Course inner join Student on Assignments.course_code = course.course_code and Assignments.student_id
-              = Student.student_id`,
+        `CALL GetStudents()`,
         function (err, result, fields) {
           if (err) throw err;
           res.send(findStudents(name, result));
@@ -224,28 +229,11 @@ var security
     });
   });
 
-  app.get("/api/studentDetails/all", (req, res) => {
-    // send the students to the front end
-    con.connect(function (err) {
-      con.query(
-        `SELECT Course.course_name, Student.student_id, Student.student_fname, quiz_1, quiz_2,quiz_3,quiz_4, homework_1,
-              homework_2, midterm, exam FROM Assignments inner join Course inner join Student on Assignments.course_code = course.course_code and Assignments.student_id
-              = Student.student_id`,
-        function (err, result, fields) {
-          if (err) throw err;
-          res.send(result);
-
-        }
-
-      );
-    });
-  });
   app.get("/api/studentDetails", (req, res) => {
-   var email = req.query.email;
     // send the students to the front end
     con.connect(function (err) {
       con.query(
-        "SELECT Course.course_name, Student.student_id, Student.student_fname, quiz_1, quiz_2,quiz_3,quiz_4, homework_1,homework_2, midterm, exam FROM Assignments inner join Student inner join CourseSection inner join Course inner join Users inner join Faculty on Users.FirstName = faculty.faculty_fname and Assignments.course_code = courseSection.course_code and courseSection.instructor = faculty.faculty_id and Assignments.student_id = Student.student_id WHERE Users.email = ('" +email+ "')",
+        `CALL GetstudentDetails()`,
         function (err, result, fields) {
           if (err) throw err;
           res.send(result);
@@ -259,14 +247,11 @@ var security
 
   app.get("/api/course", (req, res) => {
    
-    email = req.query.email;
-
-    console.log(email);
     
     // send the courses to the front end
     con.connect(function (err) {
       con.query(
-        "SELECT section_id, Course.course_code, course_name, Faculty_fname,Faculty_Lname FROM CourseSection inner join Course inner join Users inner join Faculty on Users.FirstName = faculty.faculty_fname and courseSection.course_code = course.course_code and courseSection.instructor = faculty.faculty_id WHERE Users.email = ('" +email+ "')",
+        `CALL Course()`,
         function (err, result, fields) {
           if (err) throw err;
 
@@ -274,27 +259,6 @@ var security
         }
       );
     });
-  });
-
-  app.get("/api/course/all", (req, res) => {
-   
-   
-    
-    // send the courses to the front end
-    con.connect(function (err) {
-      con.query(
-        `SELECT section_id, Course.course_code, course_name, Faculty_fname, 
-    Faculty_Lname FROM CourseSection inner join Course inner join Faculty 
-    on courseSection.course_code = course.course_code and courseSection.instructor = faculty.faculty_id `,
-        function (err, result, fields) {
-          if (err) throw err;
-          console.log(result);
-
-          res.send(result);
-        }
-      );
-    });
-  
   });
   //
 
@@ -338,9 +302,6 @@ var security
     return list;
   }
 
-  //write code to save the csv to the database by uupdating the row with the same name and course code or if the row does not exist insert it
-
-
   app.post("/api/save/", (req, res) => {
     // saves the array that the front end sent to the server as a variable
     CsvSent = req.body.arr;
@@ -350,14 +311,7 @@ var security
     // insert the csv sent to the Assignments table in the database
     con.connect(function (err) {
       con.query(
-        `IF EXISTS (SELECT * FROM Assignments WHERE student_id=? AND course_code=?)
-         BEGIN
-           UPDATE Assignments SET quiz_1=?, quiz_2=?, quiz_3=?, quiz_4=?, homework_1=?, homework_2=?, midterm=?, exam=? WHERE student_id=? AND course_code=?;
-         END
-         ELSE
-         BEGIN
-           INSERT INTO Assignments (student_id, quiz_1, quiz_2, quiz_3, quiz_4, homework_1, homework_2, midterm, exam, course_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-         END`,
+        `INSERT INTO Assignments (student_id, quiz_1, quiz_2, quiz_3, quiz_4, homework_1, homework_2, midterm, exam, course_code) VALUES ?`,
         [objectToList(checkData(CsvSent), id)],
         function (err, result, fields) {
           if (err) throw err;
@@ -365,7 +319,6 @@ var security
         }
       );
     });
-s    
 
   });
   app.get("/api/checkArray", (req, res) => {
@@ -376,10 +329,7 @@ s
   app.get("/api/studentSummaryStudent", (req, res) => {
     con.connect(function (err) {
       con.query(
-        `select student.student_id, student_fname, student_lname, percentage, gpa 
-    from StudentGrade join Student join CourseAssignment 
-    on student.student_id = studentgrade.student_id and 
-    studentgrade.assignment_id =courseassignment.assignment_id `,
+        `CALL GetStudentSummaryStudent()`,
         function (err, result, fields) {
           if (err) throw err;
           res.send(result);
@@ -392,15 +342,11 @@ s
   app.get("/api/studentSummaryAssignments", (req, res) => {
     con.connect(function (err) {
       con.query(
-        `select courseassignment.assignment_name , percentage,
-    min(Percentage), max(percentage), avg(percentage),courseassignment.assignment_weight 
-    from StudentGrade join CourseAssignment on 
-    StudentGrade.assignment_id = courseassignment.assignment_id 
-    group by courseassignment.assignment_name, courseassignment.assignment_weight, studentGrade.Percentage `,
+        `CALL  GetStudentSummaryAssignments()`,
       function (err, result, fields) {
         if (err) throw err;
         res.send(result);
-        //console.log(result);
+        console.log(result);
       }
     );
   });
@@ -410,7 +356,7 @@ s
 // get account date from the database for the signin page
 app.get("/api/accountData", (req, res) => {
   con.connect(function (err) {
-    con.query(`select account_email, account_password, account_type from account`,
+    con.query(`CALL GetAccountData()`,
       function (err, result, fields) {
         if (err) throw err;
         res.send(result);
@@ -422,19 +368,15 @@ app.get("/api/accountData", (req, res) => {
 
 //Get course_name, course_code, avg_pass, avg_fail, course_outcomes for the course section from the database
 app.get("/api/courseSummaryData", (req, res) => {
-  var sql = `select c.course_code, c.course_name, c.outcomes from course c where (c.course_code = ?)`;
-  con.query(sql, [code],
-    function (err, result, fields) {
-      if (err) {
-        console.log(err);
-        throw err;
-      }
-      else {
+  con.connect(function (err) {
+    con.query(`CALL GetCourseSummaryData()`,
+      function (err, result, fields) {
+        if (err) throw err;
         console.log(result);
         res.send(result);
       }
-    }
-  );
+    );
+  });
 });
 
   app.listen(3001, () => {

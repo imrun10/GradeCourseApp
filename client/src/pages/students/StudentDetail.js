@@ -4,12 +4,18 @@ import "../../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "../../components/Tables/Table"; // table component
 import Navbar from "../../components/NavBar/NavBar";
+import { useCookies } from "react-cookie";
 
 export default function StudentDetail() {
 
   const [importedStudents, setImportedStudents] = useState([]); // this use state will help us save the data we get from the backend of all the students in the course the user clicked
 
-  Axios.get("http://localhost:3001/api/studentDetails").then((response) => setImportedStudents(response.data)); // we save the data we get from the backend in the importedStudents variabl
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+
+ 
+  // redirect to main page if token cookies and email cookies are set
+  var emailCookie = cookies.email;
+  Axios.get("http://localhost:3001/api/studentDetails",{params:{email:emailCookie}}).then((response) => setImportedStudents(response.data)); // we save the data we get from the backend in the importedStudents variabl
     return (
       <div>
         <header>

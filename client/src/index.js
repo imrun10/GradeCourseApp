@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import CoursePage from "./pages/Courses/CoursePage";
 import StudentSummaryPage from "./pages/students/StudentSummaryPage";
 import NotFound from "./pages/Admin/PageNotFound";
+import Register from "./pages/Admin/SignUp";
 import Switch from "react-router-dom";
 import { CookiesProvider } from 'react-cookie';
 
@@ -41,6 +42,9 @@ root.render(
         <Route path="/Students" element={<StudentDetail />} />
         <Route path="/Students/student" element={<StudentSummaryPage />} />
         <Route path="/coursePage/course/summary" element={<CourseSummary />} />
+
+        <Route path="/register" element={<Register />} />
+      
        {/* <Route path="/CoursePage/course/student" element={<StudentSummaryPage />} />*/}
         <Route path="*" element={<NotFound />} />
       </Routes>
