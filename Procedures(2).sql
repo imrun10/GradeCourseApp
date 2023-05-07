@@ -16,7 +16,9 @@ IN Username varchar(50), IN UserPassword password(50),priorityLvl varchar(50))
 BEGIN --
 	INSERT INTO Users(FirstName, LastName, Email,UserName,Password,PriorityLevel) values (FirstName, LastName,
 email,Username,UserPassword,priorityLvl);
-END $$
+END $$ 
+
+
 
 
 CREATE PROCEDURE GetStudents()
