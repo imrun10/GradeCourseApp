@@ -12,6 +12,17 @@ export default function StudentDetail() {
 
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
 
+  var securityCookie = cookies.security;
+
+
+  useEffect(() => {
+  
+    if(securityCookie == 1){
+    getCourses();}
+    else if(securityCookie == 2 || securityCookie == 3){
+      getAllCourses();}
+    },[]);
+
  
   // redirect to main page if token cookies and email cookies are set
   var emailCookie = cookies.email;
