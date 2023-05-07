@@ -359,7 +359,7 @@ var security
       function (err, result, fields) {
         if (err) throw err;
         res.send(result);
-        console.log(result);
+        //console.log(result);
       }
     );
   });
@@ -381,15 +381,19 @@ app.get("/api/accountData", (req, res) => {
 
 //Get course_name, course_code, avg_pass, avg_fail, course_outcomes for the course section from the database
 app.get("/api/courseSummaryData", (req, res) => {
-  con.connect(function (err) {
-    con.query(`select c.course_code as code, c.course_name as name, c.outcomes from course c join courseSection cs on c.course_code = cs.course_code;`,
-      function (err, result, fields) {
-        if (err) throw err;
+  var sql = `select c.course_code, c.course_name, c.outcomes from course c where (c.course_code = ?)`;
+  con.query(sql, [code],
+    function (err, result, fields) {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+      else {
         console.log(result);
         res.send(result);
       }
-    );
-  });
+    }
+  );
 });
 
   app.listen(3001, () => {

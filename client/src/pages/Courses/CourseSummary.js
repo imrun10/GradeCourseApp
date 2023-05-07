@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useLocation, Link } from "react-router-dom"; // useLocation will allow us to use data sent from other pages when they link here
 import "../../App.css";
@@ -8,22 +8,30 @@ import Error1 from "../../components/ErrorPages/Error1";
 
 export default function CourseSummary() {
   const location = useLocation();
-  //*
-  // Stores course data from backend
-  const [courseInfo, setCourseInfo] = useState([]);
+  const [courseList, setCourseList] = useState([]);
   
-  //Axios.get("http://localhost:3001/api/courseSummaryData").then((response) => setCourseInfo(response.data));
+  const getCourseList = async () => { 
+    return (Axios.get("http://localhost:3001/api/courseSummaryData", {
+    }).then((response) => {
+      setCourseList(response.data);
+    }));
+  }
+
+  useEffect(() => {
+    getCourseList();
+
+  }, []);
 
   /*
   const testCourseInfo = {
-      course_name: Full Course Name,
-      course_code: COURSECODE,
-      avg_pass: "100 %"         avg_fail: "0 %",
-      course_outcomes: Course description goes here...
+      course_name: 'Full Course Name',
+      course_code: 'COURSECODE',
+      avg_pass: "100 %", avg_fail: "0 %",
+      course_outcomes: 'Course description goes here...'
   };
-  */
+  //*/
 
-  if(courseInfo === "MISSING"){
+  if(courseList === "MISSING"){
     return (<header><Navbar /></header>, <Error1 />)
   }
   else{
@@ -37,10 +45,16 @@ export default function CourseSummary() {
           <div class="wrapper">
 
             <div id="content">
-              <b>Course Name: </b> {courseInfo.name} <br/>
-              <b>Course Code: </b> {courseInfo.code} <br/>
-              <b>Average Pass Rate: </b> {courseInfo.passRate} <b>Average Fail Rate: </b> {courseInfo.failRate} <br/>
-              <b>Course Outcomes: </b> {courseInfo.courseOutcomes} <br/>
+              {courseList.map((course, index) => {
+                return (
+                  <div>
+                  <p><b>Course Name: </b>{course.course_name}</p>
+                  <p><b>Course Code: </b>{course.course_code}</p>
+                  <p><b>Pass Rate: </b>{course.pass_rate} <b>Fail Rate: </b>{course.fail_rate}</p>
+                  <p><b>Course Outcomes: </b>{course.outcomes}</p>
+                  </div>
+                );
+              })}
             </div>
 
             <footer class="footer">
