@@ -241,20 +241,53 @@ var security
     });
   });
   app.get("/api/studentDetails", (req, res) => {
-   var email = req.query.email;
-    // send the students to the front end
-    con.connect(function (err) {
-      con.query(
-        "SELECT Course.course_name, Student.student_id, Student.student_fname, quiz_1, quiz_2,quiz_3,quiz_4, homework_1,homework_2, midterm, exam FROM Assignments inner join Student inner join CourseSection inner join Course inner join Users inner join Faculty on Users.FirstName = faculty.faculty_fname and Assignments.course_code = courseSection.course_code and courseSection.instructor = faculty.faculty_id and Assignments.student_id = Student.student_id WHERE Users.email = ('" +email+ "')",
-        function (err, result, fields) {
-          if (err) throw err;
-          res.send(result);
-
+    const email = req.query.email;
+  
+    // Find the faculty_id based on the user's email
+    con.query(
+      "SELECT faculty_id FROM Faculty WHERE faculty_fname IN (SELECT FirstName FROM Users WHERE email = ?)",
+      [email],
+      function (err, facultyResult, fields) {
+        if (err) throw err;
+  
+        if (facultyResult.length === 0) {
+          // If no faculty found with the given email, return an empty result
+          res.send([]);
+          return;
         }
-
-      );
-    });
+  
+        const facultyId = facultyResult[0].faculty_id;
+  
+        // Retrieve the course codes taught by the faculty
+        con.query(
+          "SELECT course_code FROM CourseSection WHERE instructor = ?",
+          [facultyId],
+          function (err, courseResult, fields) {
+            if (err) throw err;
+  
+            if (courseResult.length === 0) {
+              // If no courses found, return an empty result
+              res.send([]);
+              return;
+            }
+  
+            const courseCodes = courseResult.map((course) => course.course_code);
+  
+            // Retrieve the student details for the selected course codes
+            con.query(
+              "SELECT Course.course_name, Student.student_id, Student.student_fname, quiz_1, quiz_2, quiz_3, quiz_4, homework_1, homework_2, midterm, exam FROM Assignments INNER JOIN Student ON Assignments.student_id = Student.student_id INNER JOIN Course ON Assignments.course_code = Course.course_code WHERE Assignments.course_code IN (?)",
+              [courseCodes],
+              function (err, studentResult, fields) {
+                if (err) throw err;
+                res.send(studentResult);
+              }
+            );
+          }
+        );
+      }
+    );
   });
+  
 
 
   app.get("/api/course", (req, res) => {
@@ -346,26 +379,33 @@ var security
     CsvSent = req.body.arr;
     id = req.body.id;
     console.log(id);
-
+    dataList = objectToList(checkData(CsvSent), id);
+    console.log(dataList);
     // insert the csv sent to the Assignments table in the database
     con.connect(function (err) {
       con.query(
-        `IF EXISTS (SELECT * FROM Assignments WHERE student_id=? AND course_code=?)
-         BEGIN
-           UPDATE Assignments SET quiz_1=?, quiz_2=?, quiz_3=?, quiz_4=?, homework_1=?, homework_2=?, midterm=?, exam=? WHERE student_id=? AND course_code=?;
-         END
-         ELSE
-         BEGIN
-           INSERT INTO Assignments (student_id, quiz_1, quiz_2, quiz_3, quiz_4, homework_1, homework_2, midterm, exam, course_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-         END`,
-        [objectToList(checkData(CsvSent), id)],
+        `INSERT INTO Assignments (student_id, quiz_1, quiz_2, quiz_3, quiz_4, homework_1, homework_2, midterm, exam, course_code)
+         VALUES ? 
+         ON DUPLICATE KEY UPDATE
+           quiz_1 = VALUES(quiz_1),
+           quiz_2 = VALUES(quiz_2),
+           quiz_3 = VALUES(quiz_3),
+           quiz_4 = VALUES(quiz_4),
+           homework_1 = VALUES(homework_1),
+           homework_2 = VALUES(homework_2),
+           midterm = VALUES(midterm),
+           exam = VALUES(exam)`,
+        [dataList], // Wrap dataList in an outer array to represent multiple rows
         function (err, result, fields) {
           if (err) throw err;
           console.log(result);
         }
       );
     });
-s    
+    
+    
+    
+
 
   });
   app.get("/api/checkArray", (req, res) => {

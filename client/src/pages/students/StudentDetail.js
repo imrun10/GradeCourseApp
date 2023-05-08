@@ -6,6 +6,9 @@ import Table from "../../components/Tables/Table"; // table component
 import Navbar from "../../components/NavBar/NavBar";
 import { useCookies } from "react-cookie";
 
+import { useEffect } from "react";
+
+
 export default function StudentDetail() {
 
   const [importedStudents, setImportedStudents] = useState([]); // this use state will help us save the data we get from the backend of all the students in the course the user clicked
@@ -15,19 +18,22 @@ export default function StudentDetail() {
   var securityCookie = cookies.security;
 
 
-  useEffect(() => {
+ useEffect(() => {
   
     if(securityCookie == 1){
-    getCourses();}
+    getStudent();}
     else if(securityCookie == 2 || securityCookie == 3){
-      getAllCourses();}
+      getStudentAll();}
     },[]);
 
  
   // redirect to main page if token cookies and email cookies are set
   var emailCookie = cookies.email;
-  Axios.get("http://localhost:3001/api/studentDetails",{params:{email:emailCookie}}).then((response) => setImportedStudents(response.data)); // we save the data we get from the backend in the importedStudents variabl
-    return (
+  const getStudent = async () => { await Axios.get("http://localhost:3001/api/studentDetails",{params:{email:emailCookie}}).then((response) => setImportedStudents(response.data));} // we save the data we get from the backend in the importedStudents variabl
+   
+  const getStudentAll = async () => { await Axios.get("http://localhost:3001/api/studentDetails/all",{params:{email:emailCookie}}).then((response) => setImportedStudents(response.data));} // we save the data we get from the backend in the importedStudents variabl
+
+  return (
       <div>
         <header>
           <Navbar />
@@ -45,18 +51,7 @@ export default function StudentDetail() {
             <footer class="footer">
              
 
-              <button
-                class="btn btn-primary"
-                style={{
-                  backgroundColor: "RGB(100, 239, 100",
-                  borderColor: "RGB(100, 239, 100)",
-                }}
-                onClick={(e) => {
-                 
-                }}
-              >
-                +
-              </button>
+             
             </footer>
           </div>
         </body>
