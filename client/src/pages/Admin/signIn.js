@@ -123,7 +123,7 @@ function refreshPage(){
            }} /> <br />
            <button class = "btn btn-primary sign-in" style = {{color:"white",fontSize:"20px"}}
             
-            onClick={()=>{loggin()}}>Login</button>
+            onClick={()=>{loggin()}}>Log in</button>
         </div>
     </div>
   </div>
