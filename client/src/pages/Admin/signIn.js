@@ -1,3 +1,5 @@
+
+
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
@@ -95,18 +97,38 @@ function refreshPage(){
   return (<div>
     <div class="App">
    
+    <div
+      style={{
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      
+      }}
+    >
+    <header>
+
+          <h1 class="smaller-title">
+       Login
+          </h1>
+        </header>
+        <br></br>
+        
 
         <div class="login">
-           <h1>Login</h1>
+       
            <input type="text" placeholder="Username…" onChange={(e) =>{
               setUernameLog(e.target.value);
            }} /> <br/>
            <input type="password" placeholder="Password…"onChange={(e) =>{
               setPasswordLog(e.target.value);
            }} /> <br />
-           <button onClick={()=>{loggin()}}>Login</button>
+           <button class = "btn btn-primary sign-in" style = {{color:"white",fontSize:"20px"}}
+            
+            onClick={()=>{loggin()}}>Login</button>
         </div>
     </div>
+  </div>
   </div>);
 }
 
