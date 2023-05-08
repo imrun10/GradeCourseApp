@@ -94,7 +94,7 @@ function refreshPage(){
       })
   }
 
-  return (<div>
+  return (
     <div class="App">
    
     <div
@@ -105,8 +105,7 @@ function refreshPage(){
         transform: "translate(-50%, -50%)",
       
       }}
-    >
-    <header>
+    
 
          <h3 class="smaller-title">
             <b>Login</b> 
@@ -126,7 +125,6 @@ function refreshPage(){
             onClick={()=>{loggin()}}>Log in</button>
         </div>
     </div>
-  </div>
   </div>);
 }
 
