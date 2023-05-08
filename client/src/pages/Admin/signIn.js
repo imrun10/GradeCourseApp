@@ -108,11 +108,9 @@ function refreshPage(){
     >
     <header>
 
-          <h1 class="smaller-title">
-       Login
-          </h1>
-        </header>
-        <br></br>
+         <h3 class="smaller-title">
+            <b>Login</b> 
+          </h3>
         
 
         <div class="login">
