@@ -7,6 +7,7 @@ app.use(express.json()); // we make our server use express.json() which is a mid
 const jwt = require("jsonwebtoken"); // we use jsonwebtoken to create and verify tokens
 const bcrypt = require("bcryptjs"); // we use bcrypt to hash passwords
 require("dotenv").config();
+
 // we create a connection to the database
 const con = mysql.createConnection({
   host: "localhost",
@@ -19,14 +20,11 @@ let test_student_course = "connection.js";
 
 app.get("/display", (req, res) => {
   console.log("display");
-
 });
 
-
 app.post("/api/register", async (req, res) => {
-
   // Our register logic starts here
-
+  
   // Get user input
   const { firstName, lastName, email, password } = req.body;
   //Encrypt user password
@@ -35,15 +33,13 @@ app.post("/api/register", async (req, res) => {
   // combine first name and last name to create a username
   const username = lastName+"123";
 
-
   // Validate user input
   if (!(email && password && firstName && lastName)) {
     res.send({ status: 0, message: "All input is required" });
   }
-
   
-
   // check if user already exist
+  
   // Validate if user exist in our database
   var oldUser = false;
   var oldPassword = false;
@@ -104,21 +100,13 @@ app.post("/api/register", async (req, res) => {
     );
   });
 
-
-
-
   // Create user in our database
-
 
   console.log("done")
   // Create token
 
   // save user token
 })
-
-
-
-
 
 // Our register logic ends here
 
@@ -160,17 +148,14 @@ var security
             console.log(password)
             
         }  if (!(token==null)){
-            res.send({ status: 3, message: "Incorrect password" });}
-
-          
-          
+            res.send({ status: 3, message: "Incorrect password" });
+          }
         }
         else{
           res.send({ status: 2, message: "Invalid Credentials" });
         }
       })
   })})
-
 
   // test data  for the student and course table
 
@@ -204,12 +189,10 @@ var security
     }
   }
 
-  
   var students = [];
   app.get("/api/student", (req, res) => {
     let name = req.query.name;
 
-   
     // send the students to the front end
     con.connect(function (err) {
       con.query(
@@ -234,9 +217,7 @@ var security
         function (err, result, fields) {
           if (err) throw err;
           res.send(result);
-
         }
-
       );
     });
   });
@@ -287,13 +268,9 @@ var security
       }
     );
   });
-  
-
 
   app.get("/api/course", (req, res) => {
-   
     email = req.query.email;
-
     console.log(email);
     
     // send the courses to the front end
@@ -302,7 +279,6 @@ var security
         "SELECT section_id, Course.course_code, course_name, Faculty_fname,Faculty_Lname FROM CourseSection inner join Course inner join Users inner join Faculty on Users.FirstName = faculty.faculty_fname and courseSection.course_code = course.course_code and courseSection.instructor = faculty.faculty_id WHERE Users.email = ('" +email+ "')",
         function (err, result, fields) {
           if (err) throw err;
-
           res.send(result);
         }
       );
@@ -310,9 +286,6 @@ var security
   });
 
   app.get("/api/course/all", (req, res) => {
-   
-   
-    
     // send the courses to the front end
     con.connect(function (err) {
       con.query(
@@ -322,14 +295,11 @@ var security
         function (err, result, fields) {
           if (err) throw err;
           console.log(result);
-
           res.send(result);
         }
       );
     });
-  
   });
-  //
 
   app.get("/", (req, res) => {
     // test the server
@@ -372,8 +342,6 @@ var security
   }
 
   //write code to save the csv to the database by uupdating the row with the same name and course code or if the row does not exist insert it
-
-
   app.post("/api/save/", (req, res) => {
     // saves the array that the front end sent to the server as a variable
     CsvSent = req.body.arr;
@@ -402,12 +370,8 @@ var security
         }
       );
     });
-    
-    
-    
-
-
   });
+
   app.get("/api/checkArray", (req, res) => {
     // check if the array is empty or not by displaying it on the server
     res.send(CsvSent);
@@ -428,6 +392,7 @@ var security
     });
     //studentName, studentID, AssignmentGrade, GPA
   });
+
   // get student assignments data from the database for the studentSummaryPage
   app.get("/api/studentSummaryAssignments", (req, res) => {
     con.connect(function (err) {
