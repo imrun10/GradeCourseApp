@@ -6,8 +6,6 @@ const e = require("express");
 app.use(cors()); // we make our server use cors
 app.use(express.json()); // we make our server use express.json() which is a middleware that allows us to parse json
 
-
-
 // we create a connection to the database
 const con = mysql.createConnection({ 
   host: "localhost",
@@ -16,12 +14,9 @@ const con = mysql.createConnection({
   database: "Grading_System_fixed",
 }); 
 
-
 let test_student_course;
 
 //test data for the student and course table
-
-
 function x(name) { // get the students from the right course from the test_student array from the database
   let notfound = true;
   for (let i = 0; i < test_students.length; i++) { // two dimentional array that why we have two for loop
@@ -35,9 +30,6 @@ function x(name) { // get the students from the right course from the test_stude
   }
 }
 
-
-
-
 // HUDA add your code to get data from the database and transform it to the format of test_student and test_course
 app.get("/api/show", (req, res) => {
   for (var i = 0; i < test_student_course.length; i++) {
@@ -48,7 +40,6 @@ app.get("/api/show", (req, res) => {
     }
   }
 });
-
 
 app.get("/api/student", (req, res) => { // get the students from the right course from the test_student array from the database
    // query to get the students from the database
@@ -71,27 +62,22 @@ app.get("/api/course", (req, res) => { // send the courses to the front end
   });
 });
 
-
-
-
-
 app.get("/", (req, res) => { // test the server
   res.send("server test");
 });
 
-
-
 var CsvSent;
+
 app.post("/api/save/"    , (req, res) => { // saves the array that the front end sent to the server as a variable
   CsvSent = req.body.arr;
 });
+
 app.get("/api/checkArray", (req, res) => {  // check if the array is empty or not by displaying it on the server
   res.send(CsvSent);
 })
 
 // get student data from the database for the studentSummaryPage
 app.get("/api/studentSummaryStudent", (req, res) => {
-
   con.connect(function(err) {
     con.query(`call GetStudentSummaryStudent()`, function (err, result, fields) {
       if (err) throw err;
@@ -100,6 +86,7 @@ app.get("/api/studentSummaryStudent", (req, res) => {
   });
   //studentName, studentID, AssignmentGrade, GPA
 })
+
 // get student assignments data from the database for the studentSummaryPage
 app.get("/api/studentSummaryAssignments", (req, res) => {
   con.connect(function(err) {
@@ -110,7 +97,6 @@ app.get("/api/studentSummaryAssignments", (req, res) => {
   });
   //AssignmentName, Grade, Min, Mean, Max, Weight
 })
-
 
 app.listen(3001, () => { // start the server
   console.log("connected");
