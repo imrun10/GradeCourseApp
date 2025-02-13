@@ -43,6 +43,7 @@ This is a grade management application for AUBH following the SCRUM methodology.
 4. Create a `.env` file in the server directory and add the following:
     ```env
     JWT_KEY=your_jwt_secret_key
+    MYSQL=mysql_key
     ```
 
 5. Start the server:
@@ -158,4 +159,4 @@ Please follow these steps:
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
